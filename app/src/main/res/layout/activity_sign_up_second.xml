@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="30dp"
+    tools:context=".Common.RegistrationActivities.SignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/retailer_signUp_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="TODO"
+            android:padding="5dp"
+            android:src="@drawable/arrow_back"
+            tools:ignore="ContentDescription,HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/crimson_text"
+            android:text="What's your name"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/crimson_text"
+            android:text="Using your real name is \n recommended for easy identification."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/account_icon"
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_account_circle_24" />
+
+            <EditText
+                android:id="@+id/edt_first_name"
+                android:layout_width="110dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_toEndOf="@+id/account_icon"
+                android:hint="@string/first_name"
+                android:textColor="@color/black"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/first_name_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_first_name"
+                android:layout_marginTop="10dp"
+                android:layout_alignStart="@+id/edt_first_name"
+                android:layout_alignEnd="@+id/edt_first_name"
+                android:textAlignment="center"
+                android:textColor="#FF0000" />
+
+            <EditText
+                android:id="@+id/edt_last_name"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_toEndOf="@+id/edt_first_name"
+                android:hint="@string/last_name"
+                android:textColor="@color/black"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/last_name_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_first_name"
+                android:layout_marginTop="10dp"
+                android:layout_alignStart="@+id/edt_last_name"
+                android:layout_alignEnd="@+id/edt_last_name"
+                android:textAlignment="center"
+                android:textColor="#FF0000" />
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_nextActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/light_blue"
+            android:elevation="8dp"
+            android:fontFamily="@font/crimson_text"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+
+
+</ScrollView>

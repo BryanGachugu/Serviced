@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gachugusville.development.serviced">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.gachugusville.development.serviced"
+    tools:ignore="AllowBackup">
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon"
+        android:launchMode="singleTop"
+        android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Serviced">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.Serviced"
+        tools:ignore="AllowBackup">
+        <activity android:name=".Provider.AccountCreation.PicturesActivity" />
+        <activity android:name=".Provider.AccountCreation.Availability_Activity" />
+        <activity android:name=".Provider.AccountCreation.TagsActivity" />
+        <activity android:name=".Provider.AccountCreation.ServiceSetUpActivity" />
+        <activity android:name=".Provider.AccountCreation.IdentityActivity" />
+        <activity
+            android:name=".Common.SplashScreen"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Common.RegistrationActivities.VerifyOTPActivity" />
+        <activity android:name=".Common.RegistrationActivities.SignUpThirdActivity" />
+        <activity android:name=".Common.RegistrationActivities.SignUpSecondActivity" />
+        <activity android:name=".Common.RegistrationActivities.SignUp" />
+        <activity android:name=".Common.RetailerLogin" />
+        <activity android:name=".Common.ProviderLoginActivity" />
+        <activity android:name=".User.DashboardActivity" />
+        <activity android:name=".Common.LogInActivity" />
+        <activity android:name=".Main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
     </application>
 
 </manifest>

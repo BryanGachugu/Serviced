@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "296320650498-5idc4gh7u0rjvvcrlnv58la77a2a9cjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gachugusville.development.serviced",
+            "certificate_hash": "a44ddf63b94297be5287186ddda2317ca7356945"
+          }
+        },
+        {
           "client_id": "296320650498-kndgjii5s010iqji5jooc4dpjhl6vvlf.apps.googleusercontent.com",
           "client_type": 3
         }

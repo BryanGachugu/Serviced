@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Provider.AccountCreation.Availability_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/crimson_text"
+            android:text="Availability"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_how_far"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/crimson_text"
+                android:text="How far are you willing to travel?"
+                android:textColor="@color/purple_700"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/linear_layout_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/distance"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:hint="distance in kilometres">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_distance_radius"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/crimson_text"
+                    android:text="KILOMETRES."
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkbox_available_countrywide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/crimson_text"
+                android:text="@string/available_countrywide" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/crimson_text"
+            android:text="@string/select_the_days_of_the_week_that_you_are_available"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ca.antonious.materialdaypicker.MaterialDayPicker
+            android:id="@+id/day_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_always_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/crimson_text"
+            android:text="@string/always_available"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/crimson_text"
+            android:text="@string/select_the_time_that_you_are_available"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/light_blue"
+                android:elevation="5dp"
+                android:fontFamily="@font/crimson_text"
+                android:text="From"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/light_blue"
+                android:elevation="5dp"
+                android:fontFamily="@font/crimson_text"
+                android:text="To"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/next_icon" />
+
+    </LinearLayout>
+
+</ScrollView>

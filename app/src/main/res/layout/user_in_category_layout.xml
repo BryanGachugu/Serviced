@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_in_card_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="10dp"
+    android:background="@color/white"
+    app:cardCornerRadius="10dp">
+
+    <!--   TODO change this values with those of providers -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/user_cover_photo"
+            android:layout_width="180dp"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/user_name_in_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/crimson_text"
+                android:maxLines="1"
+                android:text="My name is Bryan"
+                android:textColor="@color/black" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_userService"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="20dp"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:fontFamily="@font/crimson_text"
+            android:maxLines="1"
+            android:layout_weight="1"
+            android:text="I will design any website for you"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite_24" />
+
+                <TextView
+                    android:id="@+id/integer_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:ellipsize="end"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="252455"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/user_pay_rate_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/crimson_text"
+                    android:text="Kes."
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/user_pay_rate_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/crimson_text"
+                    android:text="7827"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/user_pay_rate_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/crimson_text"
+                    android:text="hr"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
