@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
+        
+
         //YoYo is a github library for applying animation to views
         TextView textView = findViewById(R.id.txtWelcome);
         YoYo.with(Techniques.Shake).duration(4000).repeat(10).playOn(textView);

@@ -10,7 +10,7 @@ public class User {
 
 
 
-    private String first_name, last_name, profile_picture_url, phone_number, email;
+    private String first_name, last_name, profile_picture_url, phone_number, email, country;
     private float rating;
     List<String> reviews;
 
@@ -70,7 +70,15 @@ public class User {
         this.email = email;
     }
 
-    public User(String first_name, String last_name, String profile_picture_url, String phone_number, String email, float rating, List<String> reviews) {
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public User(String first_name, String last_name, String profile_picture_url, String phone_number, String email, String country, float rating, List<String> reviews) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.profile_picture_url = profile_picture_url;
@@ -78,5 +86,6 @@ public class User {
         this.email = email;
         this.rating = rating;
         this.reviews = reviews;
+        this.country = country;
     }
 }

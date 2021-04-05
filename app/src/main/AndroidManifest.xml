@@ -31,8 +31,6 @@
         <activity android:name=".Common.RegistrationActivities.SignUpThirdActivity" />
         <activity android:name=".Common.RegistrationActivities.SignUpSecondActivity" />
         <activity android:name=".Common.RegistrationActivities.SignUp" />
-        <activity android:name=".Common.RetailerLogin" />
-        <activity android:name=".Common.ProviderLoginActivity" />
         <activity android:name=".User.DashboardActivity" />
         <activity android:name=".Common.LogInActivity" />
         <activity android:name=".Main.MainActivity">

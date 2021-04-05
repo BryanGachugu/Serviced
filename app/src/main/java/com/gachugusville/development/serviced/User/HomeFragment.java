@@ -1,6 +1,5 @@
 package com.gachugusville.development.serviced.User;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.Adapters.HomeCardsAdapter;
+import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.Main.HomeCard;
 import com.gachugusville.development.serviced.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -29,6 +31,8 @@ public class HomeFragment extends Fragment {
     CardView toProvidersApp;
     RecyclerView lading_page_rcView;
     List<HomeCard> homeCards;
+    private String Uid;
+    private String country;
     HomeCardsAdapter homeCardsAdapter;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottom_nav;
@@ -49,8 +53,21 @@ public class HomeFragment extends Fragment {
         lading_page_rcView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         lading_page_rcView.setAdapter(homeCardsAdapter);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Uid = user.getUid();
+            FirebaseFirestore.getInstance().collection("Users").document(Uid).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            country = documentSnapshot.toObject(User.class).getCountry();
+                        }
+                    });
+        }
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("HomeCards")
+        db.collection("Services")
+                .whereEqualTo("country", country)
                 .limit(10)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
