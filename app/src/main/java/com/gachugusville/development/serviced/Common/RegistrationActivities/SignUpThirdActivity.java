@@ -3,10 +3,14 @@ package com.gachugusville.development.serviced.Common.RegistrationActivities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +25,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +38,7 @@ public class SignUpThirdActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private FusedLocationProviderClient fusedLocationClient;
+    public User user = new User();
     EditText edt_email;
     String email_error;
 
@@ -45,9 +53,7 @@ public class SignUpThirdActivity extends AppCompatActivity {
         edt_email = findViewById(R.id.edt_email);
         retailer_signUp_back_btn = findViewById(R.id.retailer_signUp_back_btn);
         txt_email_error = findViewById(R.id.txt_email_error);
-
         email_error = "Invalid Email";
-
         //hooks
         btn_done = findViewById(R.id.btn_done);
         btn_done.setOnClickListener(v -> {
@@ -57,6 +63,8 @@ public class SignUpThirdActivity extends AppCompatActivity {
             //else notify the user that the email is invalid
             else txt_email_error.setText(email_error);
         });
+
+        checkLocationPermission();
 
         retailer_signUp_back_btn.setOnClickListener(v -> SignUpThirdActivity.super.onBackPressed());
     }
@@ -68,8 +76,12 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 getIntent().getStringExtra("phone_number"),
                 edt_email.getText().toString(),
                 "Kenya",
-                0, null); // Phone number, rating and reviews
+                user.getLongitude(),
+                user.getLatitude(),
+                0,
+                null); // Phone number, rating and reviews
         db.collection("Users").add(newUser);
+
         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
     }
 
@@ -127,7 +139,7 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 // location-related task you need to do.
                 getLocation();
             } else {
-                User user = new User();
+
                 user.setCountry("United States");
                 user.setLatitude(0);
                 user.setLongitude(0);
@@ -140,15 +152,16 @@ public class SignUpThirdActivity extends AppCompatActivity {
         fusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
             Location location = task.getResult();
             try {
-                Geocoder geocoder = new Geocoder(AvailabilityActivity.this, Locale.getDefault());
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                Provider.getInstance().setLatitude(addresses.get(0).getLatitude());
-                Provider.getInstance().setLongitude(addresses.get(0).getLongitude());
-                Provider.getInstance().setCountry(addresses.get(0).getCountryName());
+                ;
+                user.setLongitude(addresses.get(0).getLongitude());
+                user.setLatitude(addresses.get(0).getLatitude());
+                user.setCountry(addresses.get(0).getCountryName());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).addOnFailureListener(e -> Toast.makeText(AvailabilityActivity.this, "Could not get your location", Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> Toast.makeText(this, "Could not get your location", Toast.LENGTH_SHORT).show());
     }
 
     @Override
