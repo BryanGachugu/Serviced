@@ -1,16 +1,23 @@
 package com.gachugusville.development.serviced.Common.RegistrationActivities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-import com.gachugusville.development.serviced.User.DashboardActivity;
 import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.R;
+import com.gachugusville.development.serviced.User.DashboardActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -22,6 +29,8 @@ public class SignUpThirdActivity extends AppCompatActivity {
     TextView txt_email_error;
     ImageView retailer_signUp_back_btn;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private FusedLocationProviderClient fusedLocationClient;
     EditText edt_email;
     String email_error;
 
@@ -29,6 +38,8 @@ public class SignUpThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_third);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
 
         //Hooks
         edt_email = findViewById(R.id.edt_email);
@@ -52,8 +63,12 @@ public class SignUpThirdActivity extends AppCompatActivity {
 
     private void addUserToDatabase() {
         User newUser = new User(getIntent().getStringExtra("first_name"), //first name from previous activity
-                getIntent().getStringExtra("last_name"), null, // last name and photo URI
-                getIntent().getStringExtra("phone_number"), edt_email.getText().toString(), 0, null); // Phone number, rating and reviews
+                getIntent().getStringExtra("last_name"),
+                null, // last name and photo URI
+                getIntent().getStringExtra("phone_number"),
+                edt_email.getText().toString(),
+                "Kenya",
+                0, null); // Phone number, rating and reviews
         db.collection("Users").add(newUser);
         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
     }
@@ -70,4 +85,90 @@ public class SignUpThirdActivity extends AppCompatActivity {
         }
         return isValid;
     }
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_location_permission)
+                        .setMessage(R.string.text_location_permission)
+                        .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                            //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(SignUpThirdActivity.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST_LOCATION);
+                        })
+                        .create()
+                        .show();
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission was granted, yay! Do the
+                // location-related task you need to do.
+                getLocation();
+            } else {
+                User user = new User();
+                user.setCountry("United States");
+                user.setLatitude(0);
+                user.setLongitude(0);
+
+            }
+        }
+    }
+
+    private void getLocation() {
+        fusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
+            Location location = task.getResult();
+            try {
+                Geocoder geocoder = new Geocoder(AvailabilityActivity.this, Locale.getDefault());
+                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                Provider.getInstance().setLatitude(addresses.get(0).getLatitude());
+                Provider.getInstance().setLongitude(addresses.get(0).getLongitude());
+                Provider.getInstance().setCountry(addresses.get(0).getCountryName());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).addOnFailureListener(e -> Toast.makeText(AvailabilityActivity.this, "Could not get your location", Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            getLocation();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            getLocation();
+        }
+    }
+
 }

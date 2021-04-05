@@ -61,4 +61,7 @@
     <string name="select_the_days_of_the_week_that_you_are_available">Select days of the week that you are available</string>
     <string name="always_available">Always available</string>
     <string name="select_the_time_that_you_are_available">Select the times of the day you are available</string>
+    <string name="title_location_permission">Location services needed</string>
+    <string name="text_location_permission">Serviced needs to access your location for the best performance</string>
+    <string name="ok">Ok</string>
 </resources>

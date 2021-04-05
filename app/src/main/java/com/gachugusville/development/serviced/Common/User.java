@@ -11,6 +11,7 @@ public class User {
 
 
     private String first_name, last_name, profile_picture_url, phone_number, email, country;
+    double latitude, longitude;
     private float rating;
     List<String> reviews;
 
@@ -78,7 +79,24 @@ public class User {
         this.country = country;
     }
 
-    public User(String first_name, String last_name, String profile_picture_url, String phone_number, String email, String country, float rating, List<String> reviews) {
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public User(String first_name, String last_name, String profile_picture_url, String phone_number, String email, String country,
+                double longitude, double latitude, float rating, List<String> reviews) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.profile_picture_url = profile_picture_url;
@@ -87,5 +105,7 @@ public class User {
         this.rating = rating;
         this.reviews = reviews;
         this.country = country;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
