@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.Adapters.HomeCardsAdapter;
 import com.gachugusville.development.serviced.Main.HomeCard;
-import com.gachugusville.development.serviced.Provider.AccountCreation.IdentityActivity;
 import com.gachugusville.development.serviced.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentChange;
@@ -43,8 +42,6 @@ public class HomeFragment extends Fragment {
         bottom_nav = Objects.requireNonNull(getActivity()).findViewById(R.id.bottom_nav);
         db = FirebaseFirestore.getInstance();
         lading_page_rcView = view.findViewById(R.id.lading_page_rcView);
-
-        toProvidersApp.setOnClickListener( v -> startActivity(new Intent(getActivity().getBaseContext(), IdentityActivity.class)));
 
         homeCards = new ArrayList<>();
         homeCardsAdapter = new HomeCardsAdapter(homeCards, getContext());
