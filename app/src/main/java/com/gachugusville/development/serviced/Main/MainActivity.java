@@ -15,6 +15,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.gachugusville.development.serviced.Common.LogInActivity;
 import com.gachugusville.development.serviced.Common.RegistrationActivities.SignUp;
+import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -28,12 +29,14 @@ import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
     private static final int GPS_REQUEST_CODE = 1001;
+    public static User user = new User();
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //disable landscape mode
+        //disable landscape mod
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 

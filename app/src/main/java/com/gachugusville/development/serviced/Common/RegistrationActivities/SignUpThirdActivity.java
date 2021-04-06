@@ -38,7 +38,6 @@ public class SignUpThirdActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private FusedLocationProviderClient fusedLocationClient;
-    public User user = new User();
     EditText edt_email;
     String email_error;
 
