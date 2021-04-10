@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -155,11 +156,11 @@ public class SignUpThirdActivity extends AppCompatActivity {
             try {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                MainActivity.user.setLongitude(addresses.get(0).getLongitude());
-                MainActivity.user.setLatitude(addresses.get(0).getLatitude());
-                MainActivity.user.setCountry(addresses.get(0).getCountryName());
+                User.getInstance().setLongitude(addresses.get(0).getLongitude());
+                User.getInstance().setLatitude(addresses.get(0).getLatitude());
+                User.getInstance().setCountry(addresses.get(0).getCountryName());
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d("LocationError", e.getMessage());
             }
         }).addOnFailureListener(e -> Toast.makeText(this, "Could not get your location", Toast.LENGTH_SHORT).show());
     }

@@ -29,7 +29,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
     private static final int GPS_REQUEST_CODE = 1001;
-    public static User user = new User();
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -91,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LogInActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in_activity, R.anim.fade_out_activity);
-
         });
-
     }
 
     @Override

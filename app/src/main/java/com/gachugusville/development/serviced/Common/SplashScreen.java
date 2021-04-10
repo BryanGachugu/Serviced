@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gachugusville.development.serviced.Common.RegistrationActivities.SignUpSecondActivity;
 import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.User.DashboardActivity;
@@ -33,7 +34,6 @@ public class SplashScreen extends AppCompatActivity {
             getUserData();
         } else
             startActivity(new Intent(this, MainActivity.class));
-        finish();
     }
 
     private void getUserData() {
@@ -41,16 +41,23 @@ public class SplashScreen extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         try {
+                            //Document exists, that means user data is available
                             documentSnapshot.toObject(User.class);
                         } catch (Exception e) {
                             Log.d("UserValueErrors", e.getMessage());
                         }
+                    } else {
+                        //This means user did not complete registration, take him to the activity just after authentication          genius right?
+                        startActivity(new Intent(SplashScreen.this, SignUpSecondActivity.class));
                     }
                 })
-                .addOnFailureListener(e -> Log.d("UserDataRetrieveError", e.getMessage()));
-        startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
+                .addOnFailureListener(e ->{
+                    Log.d("UserDataRetrieveError", e.getMessage());
+                    //TODO make sure there is an active internet connection
+                    //if there is no internet, the app continues with previous fetched data
+                    startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
+                });
     }
-
 
 
 }
