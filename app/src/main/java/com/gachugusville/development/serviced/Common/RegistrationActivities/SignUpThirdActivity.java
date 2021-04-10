@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.gachugusville.development.serviced.Common.User;
+import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.User.DashboardActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -75,8 +76,8 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 getIntent().getStringExtra("phone_number"),
                 edt_email.getText().toString(),
                 "Kenya",
-                user.getLongitude(),
-                user.getLatitude(),
+                MainActivity.user.getLongitude(),
+                MainActivity.user.getLatitude(),
                 0,
                 null); // Phone number, rating and reviews
         db.collection("Users").add(newUser);
@@ -139,9 +140,9 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 getLocation();
             } else {
 
-                user.setCountry("United States");
-                user.setLatitude(0);
-                user.setLongitude(0);
+                MainActivity.user.setCountry("United States");
+                MainActivity.user.setLatitude(0);
+                MainActivity.user.setLongitude(0);
 
             }
         }
@@ -154,9 +155,9 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 ;
-                user.setLongitude(addresses.get(0).getLongitude());
-                user.setLatitude(addresses.get(0).getLatitude());
-                user.setCountry(addresses.get(0).getCountryName());
+                MainActivity.user.setLongitude(addresses.get(0).getLongitude());
+                MainActivity.user.setLatitude(addresses.get(0).getLatitude());
+                MainActivity.user.setCountry(addresses.get(0).getCountryName());
             } catch (IOException e) {
                 e.printStackTrace();
             }
