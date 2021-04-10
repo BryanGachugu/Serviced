@@ -16,6 +16,7 @@ import com.gachugusville.development.serviced.Main.HomeCard;
 import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.Common.User;
+import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,8 +50,8 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.home_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
 
         //TODO set Adapter for this recycler view
-        List<User> users = new ArrayList<>();
-        UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(users, context);
+        List<Provider> providers = new ArrayList<>();
+        UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(providers, context);
         holder.users_per_category_rcView.setHasFixedSize(true);
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
