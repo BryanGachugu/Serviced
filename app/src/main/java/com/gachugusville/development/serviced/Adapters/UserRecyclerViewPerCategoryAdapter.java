@@ -2,6 +2,7 @@ package com.gachugusville.development.serviced.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,15 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
     public void onBindViewHolder(@NonNull ViewHolderUsersHorizontal holder, int position) {
         holder.user_in_card_layout.setOnClickListener(v -> {
             //TODO display user details activity
-            Toast.makeText(context, holder.user_name_in_card.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, holder.documentId, Toast.LENGTH_SHORT).show();
+            Log.d("DocId", holder.documentId);
         });
 
         //TODO  set these values as those of the providers in the database
 
         holder.user_in_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
         //Set brand or Username according to Provider's data
+        holder.documentId = providersList.get(position).getDocumentId();
         if (!holder.user_name_in_card.getText().toString().isEmpty())
             holder.user_name_in_card.setText(providersList.get(position).getUser_name());
         else holder.user_name_in_card.setText(providersList.get(position).getBrand_name());
@@ -85,6 +88,7 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
 
         String service_category_offered;
         String service_offered;
+        String documentId;
         String highest_education_certification;
         String certificate_attained;
         int age;

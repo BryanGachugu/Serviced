@@ -19,6 +19,7 @@ public class Provider {
         return provider;
     }
 
+    String documentId;
     String user_name, brand_name, service_category, service_identity, personal_description,
             short_note_to_users, phone, ref_url1, ref_url2, email, country;
     List<ProviderReviews> reviews;
@@ -69,6 +70,14 @@ public class Provider {
         this.number_of_reviews = number_of_reviews;
         this.number_of_profile_likes = number_of_profile_likes;
         this.estimated_earnings = estimated_earnings;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String getUser_name() {

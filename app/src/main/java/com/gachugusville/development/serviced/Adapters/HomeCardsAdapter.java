@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.Main.HomeCard;
-import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.android.material.card.MaterialCardView;
@@ -48,7 +47,6 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.txt_see_all.setText(txt_see_all);
 
         holder.home_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
-        //TODO set Adapter for this recycler view
         List<Provider> providers = new ArrayList<>();
         UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(providers, context);
         holder.users_per_category_rcView.setHasFixedSize(true);
@@ -58,7 +56,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         if (!User.getInstance().getCountry().isEmpty()) {
             FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
             mFirebaseFirestore.collection("Providers")
-                    .whereEqualTo("country", MainActivity.user.getCountry())
+                    .whereEqualTo("country", User.getInstance().getCountry())
                     .limit(10)
                     .addSnapshotListener((value, error) -> {
                         if (error != null) {
@@ -72,8 +70,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                             }
                         }
                     });
-        }
-        else {
+        } else {
             FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
             mFirebaseFirestore.collection("Providers")
                     .limit(10)
@@ -85,11 +82,17 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                         for (DocumentChange documentChange : value.getDocumentChanges()) {
                             if (documentChange.getType() == DocumentChange.Type.ADDED) {
                                 final Provider provider = documentChange.getDocument().toObject(Provider.class);
+                                provider.setDocumentId(documentChange.getDocument().getId());
                                 providers.add(provider);
                                 userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
                             }
                         }
                     });
+
+            //If there are no users in a Category, set its view to Gone
+            if (userRecyclerViewPerCategoryAdapter.getItemCount() == 0) {
+                holder.home_card_layout.setVisibility(View.GONE);
+            } else holder.home_card_layout.setVisibility(View.VISIBLE);
         }
     }
 
