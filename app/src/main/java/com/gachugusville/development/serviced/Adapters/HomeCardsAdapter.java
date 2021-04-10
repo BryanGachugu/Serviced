@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gachugusville.development.serviced.Main.HomeCard;
 import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
-import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentChange;
@@ -56,23 +55,26 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
 
-        FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
-        mFirebaseFirestore.collection("Providers")
-                .whereEqualTo("country", MainActivity.user.getCountry())
-                .limit(10)
-                .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        Log.d("Error", Objects.requireNonNull(error.getMessage()));
-                    }
-                    assert value != null;
-                    for (DocumentChange documentChange : value.getDocumentChanges()) {
-                        if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                            final User user = documentChange.getDocument().toObject(User.class);
-                            users.add(user);
-                            userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
+        if (!MainActivity.user.getCountry().isEmpty()){
+            FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
+            mFirebaseFirestore.collection("Providers")
+                    .whereEqualTo("country", MainActivity.user.getCountry())
+                    .whereEqualTo()
+                    .limit(10)
+                    .addSnapshotListener((value, error) -> {
+                        if (error != null) {
+                            Log.d("Error", Objects.requireNonNull(error.getMessage()));
                         }
-                    }
-                });
+                        assert value != null;
+                        for (DocumentChange documentChange : value.getDocumentChanges()) {
+                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                                final Provider provider = documentChange.getDocument().toObject(Provider.class);
+                                providers.add(provider);
+                                userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+        }
     }
 
     @Override

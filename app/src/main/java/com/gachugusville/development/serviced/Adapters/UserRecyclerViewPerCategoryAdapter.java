@@ -1,5 +1,6 @@
 package com.gachugusville.development.serviced.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.R;
-import com.gachugusville.development.serviced.Common.User;
+import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<UserRecyclerViewPerCategoryAdapter.ViewHolderUsersHorizontal> {
-    List<User> usersPerCategoryList;
+    List<Provider> providersList;
     Context context;
 
-    public UserRecyclerViewPerCategoryAdapter(List<User> usersPerCategoryList, Context context) {
-        this.usersPerCategoryList = usersPerCategoryList;
+    public UserRecyclerViewPerCategoryAdapter(List<Provider> providersList, Context context) {
+        this.providersList = providersList;
         this.context = context;
     }
 
@@ -35,6 +36,7 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
         return new ViewHolderUsersHorizontal(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolderUsersHorizontal holder, int position) {
         holder.user_in_card_layout.setOnClickListener(v -> {
@@ -45,17 +47,20 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
         //TODO  set these values as those of the providers in the database
 
         holder.user_in_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
-        holder.user_name_in_card.setText(usersPerCategoryList.get(position).getFirst_name());
-        holder.txt_userService.setText(usersPerCategoryList.get(position).getLast_name());
-        holder.user_pay_rate_currency.setText(usersPerCategoryList.get(position).getLast_name());
-        holder.user_pay_rate_value.setText(usersPerCategoryList.get(position).getFirst_name());
-        holder.user_pay_rate_duration.setText(usersPerCategoryList.get(position).getLast_name());
-        holder.service_category_offered = usersPerCategoryList.get(position).getFirst_name();
-        holder.service_offered = usersPerCategoryList.get(position).getLast_name();
-        holder.highest_education_certification = usersPerCategoryList.get(position).getFirst_name();
-        holder.certificate_attained = usersPerCategoryList.get(position).getFirst_name();
+        //Set brand or Username according to Provider's data
+        if (!holder.user_name_in_card.getText().toString().isEmpty())
+            holder.user_name_in_card.setText(providersList.get(position).getUser_name());
+        else holder.user_name_in_card.setText(providersList.get(position).getBrand_name());
+        holder.txt_userService.setText(providersList.get(position).getPersonal_description());
+        holder.user_pay_rate_currency.setText("$");
+        holder.user_pay_rate_value.setText("50");
+        holder.user_pay_rate_duration.setText("per job");
+        holder.service_category_offered = providersList.get(position).getService_category();
+        holder.service_offered = providersList.get(position).getService_identity();
+        holder.highest_education_certification = providersList.get(position).getUser_name();
+        holder.certificate_attained = providersList.get(position).getUser_name();
 
-        String url = usersPerCategoryList.get(position).getProfile_picture_url();
+        String url = providersList.get(position).getProfile_pic_url();
         Picasso.get()
                 .load(url)
                 .centerCrop()
@@ -66,10 +71,10 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
 
     @Override
     public int getItemCount() {
-        return usersPerCategoryList.size();
+        return providersList.size();
     }
 
-    public static class ViewHolderUsersHorizontal extends RecyclerView.ViewHolder{
+    public static class ViewHolderUsersHorizontal extends RecyclerView.ViewHolder {
 
         String service_category_offered;
         String service_offered;
