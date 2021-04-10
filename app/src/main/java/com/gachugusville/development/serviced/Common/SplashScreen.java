@@ -46,6 +46,7 @@ public class SplashScreen extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.d("UserValueErrors", e.getMessage());
                         }
+                        startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
                     } else {
                         //This means user did not complete registration, take him to the activity just after authentication          genius right?
                         startActivity(new Intent(SplashScreen.this, SignUpSecondActivity.class));

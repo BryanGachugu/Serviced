@@ -58,7 +58,7 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
         holder.user_pay_rate_currency.setText("$");
         holder.user_pay_rate_value.setText("50");
         holder.user_pay_rate_duration.setText("per job");
-        holder.integer_likes.setText(providersList.get(position).getNumber_of_profile_likes());
+        holder.integer_likes.setText(String.valueOf(providersList.get(position).getNumber_of_profile_likes()));
         holder.service_category_offered = providersList.get(position).getService_category();
         holder.service_offered = providersList.get(position).getService_identity();
         holder.highest_education_certification = providersList.get(position).getUser_name();

@@ -90,9 +90,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                     });
 
             //If there are no users in a Category, set its view to Gone
-            if (userRecyclerViewPerCategoryAdapter.getItemCount() == 0) {
-                holder.home_card_layout.setVisibility(View.GONE);
-            } else holder.home_card_layout.setVisibility(View.VISIBLE);
+
         }
     }
 
