@@ -154,7 +154,6 @@ public class SignUpThirdActivity extends AppCompatActivity {
             try {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                ;
                 MainActivity.user.setLongitude(addresses.get(0).getLongitude());
                 MainActivity.user.setLatitude(addresses.get(0).getLatitude());
                 MainActivity.user.setCountry(addresses.get(0).getCountryName());
