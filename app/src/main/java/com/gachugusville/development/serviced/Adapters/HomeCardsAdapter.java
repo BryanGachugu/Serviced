@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.Main.HomeCard;
+import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.Common.User;
 import com.google.android.material.card.MaterialCardView;
@@ -42,7 +43,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCards holder, int position) {
         String txt_see_all = "See all";
-        holder.home_cardTitle.setText(homeCardList.get(position).getHome_card_title());
+        holder.home_cardTitle.setText(homeCardList.get(position).getservice_category_name());
         holder.txt_see_all.setText(txt_see_all);
 
         holder.home_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
@@ -54,9 +55,9 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
 
-
         FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
-        mFirebaseFirestore.collection("Users")
+        mFirebaseFirestore.collection("Providers")
+                .whereEqualTo("country", MainActivity.user.getCountry())
                 .limit(10)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {

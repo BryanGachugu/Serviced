@@ -66,8 +66,7 @@ public class HomeFragment extends Fragment {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Services")
-                .whereEqualTo("country", country)
+        db.collection("ServiceCategory")
                 .limit(10)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
