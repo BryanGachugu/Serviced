@@ -67,8 +67,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                         assert value != null;
                         for (DocumentChange documentChange : value.getDocumentChanges()) {
                             if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                final Provider provider = documentChange.getDocument().toObject(Provider.class);
-                                providers.add(provider);
+                                providers.add(documentChange.getDocument().toObject(Provider.getInstance().getClass()));
                                 userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
                             }
                         }
