@@ -1,20 +1,21 @@
 {
   "project_info": {
-    "project_number": "296320650498",
-    "project_id": "serviced-ea96b",
-    "storage_bucket": "serviced-ea96b.appspot.com"
+    "project_number": "395062493212",
+    "firebase_url": "https://serviced-for-business-default-rtdb.firebaseio.com",
+    "project_id": "serviced-for-business",
+    "storage_bucket": "serviced-for-business.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:296320650498:android:e9cdc4519495015cf1c61b",
+        "mobilesdk_app_id": "1:395062493212:android:ea49bd19cc7ea9e8215fd9",
         "android_client_info": {
           "package_name": "com.gachugusville.development.serviced"
         }
       },
       "oauth_client": [
         {
-          "client_id": "296320650498-5idc4gh7u0rjvvcrlnv58la77a2a9cjl.apps.googleusercontent.com",
+          "client_id": "395062493212-u4qh20rd0fpva5isegb35n22fkkcd60n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gachugusville.development.serviced",
@@ -22,20 +23,57 @@
           }
         },
         {
-          "client_id": "296320650498-kndgjii5s010iqji5jooc4dpjhl6vvlf.apps.googleusercontent.com",
+          "client_id": "395062493212-7tg125bncc0brdqtqncoe3v1mpmb23c9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCy_FvM9mZo2rfg65SEEadQy1Yzed-SIlo"
+          "current_key": "AIzaSyBtyeqLO5iI1qAWPokNh25m9lzTmxlEDRE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "296320650498-kndgjii5s010iqji5jooc4dpjhl6vvlf.apps.googleusercontent.com",
+              "client_id": "395062493212-7tg125bncc0brdqtqncoe3v1mpmb23c9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395062493212:android:7ea00e2b75cd7866215fd9",
+        "android_client_info": {
+          "package_name": "com.gachugusville.servicedforbusiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395062493212-uh6j920idv3a4d6lr2a1q200repf7sqf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gachugusville.servicedforbusiness",
+            "certificate_hash": "a44ddf63b94297be5287186ddda2317ca7356945"
+          }
+        },
+        {
+          "client_id": "395062493212-7tg125bncc0brdqtqncoe3v1mpmb23c9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtyeqLO5iI1qAWPokNh25m9lzTmxlEDRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395062493212-7tg125bncc0brdqtqncoe3v1mpmb23c9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
