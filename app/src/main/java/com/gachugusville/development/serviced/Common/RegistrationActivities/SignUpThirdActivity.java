@@ -24,6 +24,7 @@ import com.gachugusville.development.serviced.User.DashboardActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
@@ -80,9 +81,11 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 MainActivity.user.getLatitude(),
                 0,
                 null); // Phone number, rating and reviews
-        db.collection("Users").add(newUser);
-
-        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+        db.collection("Users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .set(newUser)
+                .addOnSuccessListener(aVoid -> startActivity(new Intent(getApplicationContext(), DashboardActivity.class)))
+                .addOnFailureListener(e -> Toast.makeText(SignUpThirdActivity.this, "An error occurred", Toast.LENGTH_SHORT).show());
     }
 
     public static boolean isEmailValid(String email) {
