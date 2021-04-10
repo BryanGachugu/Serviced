@@ -19,7 +19,7 @@ public class User {
         //for Firebase
     }
 
-    private String first_name, last_name, profile_picture_url, phone_number, email, country;
+    private String first_name, last_name, profile_picture_url, phone_number, email, country = "";
     double latitude, longitude;
     private float rating;
     List<String> reviews;

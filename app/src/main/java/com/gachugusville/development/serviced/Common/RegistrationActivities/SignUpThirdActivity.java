@@ -81,7 +81,7 @@ public class SignUpThirdActivity extends AppCompatActivity {
 
         db.collection("Users")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .set(User.getInstance().getClass())
+                .set(User.getInstance())
                 .addOnSuccessListener(aVoid -> startActivity(new Intent(getApplicationContext(), DashboardActivity.class)))
                 .addOnFailureListener(e -> Toast.makeText(SignUpThirdActivity.this, "An error occurred", Toast.LENGTH_SHORT).show());
     }
