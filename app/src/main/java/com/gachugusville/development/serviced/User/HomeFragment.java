@@ -65,21 +65,25 @@ public class HomeFragment extends Fragment {
         }
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("ServiceCategory")
-                .limit(10)
-                .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        Log.d("Error", Objects.requireNonNull(error.getMessage()));
-                    }
-                    for (DocumentChange documentChange : value.getDocumentChanges()) {
-                        if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                            final HomeCard card = documentChange.getDocument().toObject(HomeCard.class);
-                            homeCards.add(card);
-                            homeCardsAdapter.notifyDataSetChanged();
+        try {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("ServiceCategory")
+                    .limit(10)
+                    .addSnapshotListener((value, error) -> {
+                        if (error != null) {
+                            Log.d("Error", Objects.requireNonNull(error.getMessage()));
                         }
-                    }
-                });
+                        for (DocumentChange documentChange : value.getDocumentChanges()) {
+                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                                final HomeCard card = documentChange.getDocument().toObject(HomeCard.class);
+                                homeCards.add(card);
+                                homeCardsAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+        } catch (Exception e){
+            Log.d("ProviderRead", e.getMessage());
+        }
 
         return view;
 

@@ -55,11 +55,28 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
 
-        if (!MainActivity.user.getCountry().isEmpty()){
+        if (!MainActivity.user.getCountry().isEmpty()) {
             FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
             mFirebaseFirestore.collection("Providers")
                     .whereEqualTo("country", MainActivity.user.getCountry())
-                    .whereEqualTo()
+                    .limit(10)
+                    .addSnapshotListener((value, error) -> {
+                        if (error != null) {
+                            Log.d("Error", Objects.requireNonNull(error.getMessage()));
+                        }
+                        assert value != null;
+                        for (DocumentChange documentChange : value.getDocumentChanges()) {
+                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                                final Provider provider = documentChange.getDocument().toObject(Provider.class);
+                                providers.add(provider);
+                                userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+        }
+        else {
+            FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
+            mFirebaseFirestore.collection("Providers")
                     .limit(10)
                     .addSnapshotListener((value, error) -> {
                         if (error != null) {
