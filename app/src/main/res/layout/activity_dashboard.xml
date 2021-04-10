@@ -7,30 +7,75 @@
     android:background="@drawable/home_card_bg"
     tools:context=".User.DashboardActivity">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_registration_incomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        android:elevation="10dp"
+        android:visibility="visible"
+        app:cardCornerRadius="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/crimson_text"
+                android:text="@string/you_did_not_complete_your_registration"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
 
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/crimson_text"
+                android:text="@string/users_will_not_be_able_to_view_your_profile"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#FFAB00"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawableTint="@color/black"
+                android:fontFamily="@font/crimson_text"
+                android:text="@string/back_to_registration"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:cornerRadius="60dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:elevation="5dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@drawable/bg_bottom_nav"
+        app:elevation="5dp"
         app:itemIconSize="30dp"
-        app:itemRippleColor="@android:color/transparent"
         app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:menu="@menu/bottom_nav_items" />
 
 
