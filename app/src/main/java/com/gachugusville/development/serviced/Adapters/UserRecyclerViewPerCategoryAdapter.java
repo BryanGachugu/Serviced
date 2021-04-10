@@ -55,17 +55,24 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
         holder.user_pay_rate_currency.setText("$");
         holder.user_pay_rate_value.setText("50");
         holder.user_pay_rate_duration.setText("per job");
+        holder.integer_likes.setText(providersList.get(position).getNumber_of_profile_likes());
         holder.service_category_offered = providersList.get(position).getService_category();
         holder.service_offered = providersList.get(position).getService_identity();
         holder.highest_education_certification = providersList.get(position).getUser_name();
         holder.certificate_attained = providersList.get(position).getUser_name();
 
         String url = providersList.get(position).getProfile_pic_url();
-        Picasso.get()
-                .load(url)
-                .centerCrop()
-                .fit()
-                .into(holder.user_cover_photo);
+        if (!url.isEmpty()) {
+            Picasso.get()
+                    .load(url)
+                    .centerCrop()
+                    .fit()
+                    .into(holder.user_cover_photo);
+        } else {
+            Picasso.get()
+                    .load(R.drawable.test_1)
+                    .into(holder.user_cover_photo);
+        }
 
     }
 
