@@ -1,8 +1,19 @@
 package com.gachugusville.development.serviced.Common;
 
+import com.gachugusville.development.serviced.Utils.Provider;
+
 import java.util.List;
 
 public class User {
+
+    private static User user;
+
+    public static User getInstance() {
+        if (user == null) {
+            user = new User();
+        }
+        return user;
+    }
 
     public User() {
         //for Firebase
@@ -93,7 +104,7 @@ public class User {
         this.longitude = longitude;
     }
 
-    public User(String first_name, String last_name, String profile_picture_url, String phone_number, String email, String country,
+    private User(String first_name, String last_name, String profile_picture_url, String phone_number, String email, String country,
                 double longitude, double latitude, float rating, List<String> reviews) {
         this.first_name = first_name;
         this.last_name = last_name;

@@ -71,19 +71,17 @@ public class SignUpThirdActivity extends AppCompatActivity {
     }
 
     private void addUserToDatabase() {
-        User newUser = new User(getIntent().getStringExtra("first_name"), //first name from previous activity
-                getIntent().getStringExtra("last_name"),
-                null, // last name and photo URI
-                getIntent().getStringExtra("phone_number"),
-                edt_email.getText().toString(),
-                "Kenya",
-                MainActivity.user.getLongitude(),
-                MainActivity.user.getLatitude(),
-                0,
-                null); // Phone number, rating and reviews
+        User.getInstance().setFirst_name(getIntent().getStringExtra("first_name"));
+        User.getInstance().setLast_name(getIntent().getStringExtra("last_name"));
+        User.getInstance().setPhone_number(getIntent().getStringExtra("phone_number"));
+        User.getInstance().setProfile_picture_url(null);
+        User.getInstance().setEmail(edt_email.getText().toString());
+        User.getInstance().setCountry("Kenya");
+        User.getInstance().setReviews(null);
+
         db.collection("Users")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .set(newUser)
+                .set(User.getInstance().getClass())
                 .addOnSuccessListener(aVoid -> startActivity(new Intent(getApplicationContext(), DashboardActivity.class)))
                 .addOnFailureListener(e -> Toast.makeText(SignUpThirdActivity.this, "An error occurred", Toast.LENGTH_SHORT).show());
     }
@@ -143,9 +141,9 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 getLocation();
             } else {
 
-                MainActivity.user.setCountry("United States");
-                MainActivity.user.setLatitude(0);
-                MainActivity.user.setLongitude(0);
+                User.getInstance().setCountry("United States");
+               User.getInstance().setLongitude(0);
+               User.getInstance().setLatitude(0);
 
             }
         }

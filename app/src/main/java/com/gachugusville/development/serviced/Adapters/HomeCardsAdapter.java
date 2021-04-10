@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.Main.HomeCard;
 import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
@@ -47,7 +48,6 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.txt_see_all.setText(txt_see_all);
 
         holder.home_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
-
         //TODO set Adapter for this recycler view
         List<Provider> providers = new ArrayList<>();
         UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(providers, context);
@@ -55,7 +55,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
 
-        if (!MainActivity.user.getCountry().isEmpty()) {
+        if (!User.getInstance().getCountry().isEmpty()) {
             FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
             mFirebaseFirestore.collection("Providers")
                     .whereEqualTo("country", MainActivity.user.getCountry())
