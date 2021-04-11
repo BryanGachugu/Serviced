@@ -1,188 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:padding="5dp">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="250dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/layout_style"
             android:baselineAligned="false"
-            android:divider="@color/black"
-            android:dividerPadding="5dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:showDividers="middle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="5dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="2dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:orientation="vertical">
+                android:id="@+id/layout_reviews"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/layout_style"
+                android:baselineAligned="false"
+                android:divider="@color/black"
+                android:dividerPadding="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:showDividers="middle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:drawableEnd="@drawable/ic_baseline_favorite_24"
-                    android:backgroundTint="@android:color/transparent"
-                    android:fontFamily="@font/crimson_text"
-                    android:text="4.5"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:textAlignment="center"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="Rating"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/crimson_text"
+                        android:text="4.5"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        app:drawableEndCompat="@drawable/star_icon" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Average rating"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:maxLines="1"
+                        android:text="100K+"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:maxLines="1"
+                        android:text="Reviews"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:orientation="vertical">
+                android:id="@+id/layout_profile_views"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/layout_style"
+                android:baselineAligned="false"
+                android:divider="@color/black"
+                android:dividerPadding="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:showDividers="middle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="100K+"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:maxLines="1"
+                        android:text="57655"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:maxLines="1"
+                        android:text="Views"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="Reviews"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_favorite_24"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:maxLines="1"
+                        android:text="51475"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/layout_style"
-            android:divider="@color/black"
-            android:dividerPadding="5dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:showDividers="middle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:textAlignment="center"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="100K+"
-                    android:textColor="@color/light_blue"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="Views"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_blue"
-                    android:textSize="24sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/ic_baseline_favorite_24" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@android:color/transparent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="100000"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_blue"
-                    android:textSize="24sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/purple_700" />
 
     </LinearLayout>
 
