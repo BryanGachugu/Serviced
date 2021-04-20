@@ -95,12 +95,15 @@ public class SearchFragment extends Fragment {
             recherche = recherche.substring(0, 1).toUpperCase() + recherche.substring(1).toLowerCase();
 
         ArrayList<Provider> results = new ArrayList<>();
-        for (Provider provider : listProviders) {
-            if (provider.getUser_name() != null && provider.getUser_name().contains(recherche)) {
-                results.add(provider);
+        if (!listProviders.isEmpty()){
+            for (Provider provider : listProviders) {
+                if (provider.getUser_name() != null && provider.getUser_name().contains(recherche)) {
+                    results.add(provider);
+                }
             }
+            updateListUsers(results);
         }
-        updateListUsers(results);
+
     }
 
     private void updateListUsers(ArrayList<Provider> listUsers) {
