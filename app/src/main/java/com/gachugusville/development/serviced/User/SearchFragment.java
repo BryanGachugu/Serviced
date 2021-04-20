@@ -37,6 +37,8 @@ public class SearchFragment extends Fragment {
 
     private void getProviders() {
         db.collection("Providers").whereEqualTo("service_name", 1)
+                .limit(10)
+                .whereLessThanOrEqualTo("location", 85)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots,
