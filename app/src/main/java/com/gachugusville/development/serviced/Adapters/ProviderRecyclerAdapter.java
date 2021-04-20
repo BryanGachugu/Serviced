@@ -46,15 +46,18 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
             Toast.makeText(context, searchList.get(position).getUser_name(), Toast.LENGTH_SHORT).show();
             Log.d("Search works", searchList.get(position).getPersonal_description());
         });
-        Picasso.get()
-                .load(searchList.get(position).getProfile_pic_url())
-                .into(holder.img_search_dp);
+       if (!searchList.get(position).getProfile_pic_url().equals("")){
+           Picasso.get()
+                   .load(searchList.get(position).getProfile_pic_url())
+                   .into(holder.img_search_dp);
+       }
 
         holder.txt_provider_name.setText(searchList.get(position).getUser_name());
         holder.txt_provider_service.setText(searchList.get(position).getService_identity());
         holder.provider_distance.setText(String.valueOf(searchList.get(position).getUser_name()));
         holder.provider_number_of_jobs.setText(String.valueOf(searchList.get(position).getJobs_done()));
         holder.provider_number_of_reviews.setText(String.valueOf(searchList.get(position).getNumber_of_reviews()));
+        holder.txt_provider_description.setText(searchList.get(position).getPersonal_description());
         holder.provider_rating_bar.setRating(searchList.get(position).getRating());
 
     }
@@ -69,7 +72,7 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
         CircleImageView img_search_dp;
 
         TextView txt_provider_name, txt_provider_service, provider_distance,
-                provider_number_of_jobs, provider_number_of_reviews;
+                provider_number_of_jobs, provider_number_of_reviews, txt_provider_description;
         RatingBar provider_rating_bar;
 
         public SearchedProviderViewHolder(@NonNull View itemView) {
@@ -81,6 +84,7 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
             provider_number_of_jobs = itemView.findViewById(R.id.provider_number_of_jobs);
             provider_number_of_reviews = itemView.findViewById(R.id.provider_number_of_reviews);
             provider_rating_bar = itemView.findViewById(R.id.provider_rating_bar);
+            txt_provider_description = itemView.findViewById(R.id.txt_provider_description);
             provider_in_search_result_layout = itemView.findViewById(R.id.provider_in_search_result_layout);
         }
     }
