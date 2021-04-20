@@ -1,6 +1,7 @@
 package com.gachugusville.development.serviced.User;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
                     fragment = new HomeFragment();
                     break;
                 case search_bottom_nav:
-                    fragment = new SearchFragment();
+                    startActivity(new Intent(this, SearchFragment.class));
                     break;
                 case message_bottom_nav:
                     fragment = new MessagesFragment();

@@ -13,12 +13,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.gachugusville.development.serviced.Adapters.CustomSearchAdapter;
 import com.gachugusville.development.serviced.R;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends AppCompatActivity {
     private ListView listView;
 
     @Nullable
@@ -27,19 +28,25 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
 
         listView = view.findViewById(R.id.listView);
-        listView.setOnItemClickListener((parent, view1, position, id) -> {
-            //execution come here when an item is clicked from
-            //the search results displayed after search form is submitted
-            //you can continue from here with user clicked search item
-            Toast.makeText(getContext(),
-                    "clicked search result item is" + ((TextView) view1).getText(),
-                    Toast.LENGTH_SHORT).show();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                //execution come here when an item is clicked from
+                //the search results displayed after search form is submitted
+                //you can continue from here with user clicked search item
+                Toast.makeText(getContext(),
+                        "clicked search result item is" + ((TextView) view).getText(),
+                        Toast.LENGTH_SHORT).show();
+            }
         });
         // search
         handleSearch();
         return view;
     }
 
+}
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -47,7 +54,7 @@ public class SearchFragment extends Fragment {
         handleSearch();
     }
     private void handleSearch() {
-        Intent intent = getIntent();
+        Intent intent = getActivity().getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String searchQuery = intent.getStringExtra(SearchManager.QUERY);
 
