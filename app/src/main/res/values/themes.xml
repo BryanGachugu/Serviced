@@ -22,4 +22,10 @@
 
     </style>
 
+    <style name="expandedBarTextStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:textSize" >0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
 </resources>

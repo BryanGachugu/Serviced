@@ -17,12 +17,56 @@
            android:layout_width="match_parent"
            android:background="@color/smokey_white"
            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-           app:expandedTitleTextAppearance="@style/expanded"
+           app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
            android:layout_height="wrap_content">
 
            <LinearLayout
                android:layout_width="match_parent"
-               android:layout_height="200dp"
+               android:layout_height="250dp"
+               android:paddingHorizontal="20dp"
+               android:orientation="vertical"
+               android:background="@drawable/top_corners_style">
+
+               <TextView
+                   android:layout_marginTop="50dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Search for services, service providers or needed skills"
+                   android:background="@android:color/transparent"
+                   android:textSize="30sp"
+                   android:textStyle="bold"
+                   android:textColor="@color/white"/>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@android:color/transparent"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_marginTop="10dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="157"
+                       android:background="@android:color/transparent"
+                       android:textSize="30sp"
+                       android:textStyle="bold"
+                       android:textColor="@color/white"/>
+
+                   <TextView
+                       android:layout_marginTop="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="service providers around your area"
+                       android:background="@android:color/transparent"
+                       android:textSize="30sp"
+                       android:textStyle="bold"
+                       android:textColor="@color/white"/>
+
+               </LinearLayout>
+
+
+           </LinearLayout>
 
 
            <androidx.appcompat.widget.Toolbar
