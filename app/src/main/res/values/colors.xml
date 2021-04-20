@@ -12,5 +12,6 @@
     <color name="clr_dark_blue">#0148A4</color>
     <color name="clr_google_btn">#f14436</color>
     <color name="clr_fb_btn">#0049FF</color>
+    <color name="smokey_white">#fafafa</color>
 
 </resources>
