@@ -33,7 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
         bottom_nav.setOnNavigationItemSelectedListener(item -> {
 
             final int home_bottom_nav = R.id.home_bottom_nav;
-            final int category_bottom_nav = R.id.category_bottom_nav;
+            final int search_bottom_nav = R.id.search_bottom_nav;
             final int message_bottom_nav = R.id.message_bottom_nav;
             final int account_bottom_nav = R.id.account_bottom_nav;
 
@@ -42,8 +42,8 @@ public class DashboardActivity extends AppCompatActivity {
                 case home_bottom_nav:
                     fragment = new HomeFragment();
                     break;
-                case category_bottom_nav:
-                    fragment = new CategoriesFragment();
+                case search_bottom_nav:
+                    fragment = new SearchFragment();
                     break;
                 case message_bottom_nav:
                     fragment = new MessagesFragment();
