@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/category_bottom_nav"
-        android:icon="@drawable/ic_category_24"
-        android:title="@string/categories" />
+        android:icon="@drawable/search_icon"
+        android:title="@string/search" />
 
     <item
         android:id="@+id/message_bottom_nav"
