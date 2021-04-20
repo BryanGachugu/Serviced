@@ -48,14 +48,13 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
         });
         Picasso.get()
                 .load(searchList.get(position).getProfile_pic_url())
-                .centerInside()
                 .into(holder.img_search_dp);
 
         holder.txt_provider_name.setText(searchList.get(position).getUser_name());
         holder.txt_provider_service.setText(searchList.get(position).getService_identity());
         holder.provider_distance.setText(String.valueOf(searchList.get(position).getUser_name()));
-        holder.provider_number_of_jobs.setText(searchList.get(position).getJobs_done());
-        holder.provider_number_of_reviews.setText(searchList.get(position).getNumber_of_reviews());
+        holder.provider_number_of_jobs.setText(String.valueOf(searchList.get(position).getJobs_done()));
+        holder.provider_number_of_reviews.setText(String.valueOf(searchList.get(position).getNumber_of_reviews()));
         holder.provider_rating_bar.setRating(searchList.get(position).getRating());
 
     }

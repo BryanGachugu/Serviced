@@ -42,6 +42,7 @@ public class SearchFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         search_RC = view.findViewById(R.id.search_RC);
         edt_search_string = view.findViewById(R.id.edt_search_string);
+        getProviders();
 
         edt_search_string.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,9 +68,8 @@ public class SearchFragment extends Fragment {
     }
 
     private void getProviders() {
-        db.collection("Providers").whereEqualTo("service_name", 1)
+        db.collection("Providers")
                 .limit(10)
-                .whereLessThanOrEqualTo("location", 85)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots,
@@ -95,14 +95,13 @@ public class SearchFragment extends Fragment {
             recherche = recherche.substring(0, 1).toUpperCase() + recherche.substring(1).toLowerCase();
 
         ArrayList<Provider> results = new ArrayList<>();
-        if (!listProviders.isEmpty()){
+
             for (Provider provider : listProviders) {
                 if (provider.getUser_name() != null && provider.getUser_name().contains(recherche)) {
                     results.add(provider);
                 }
-            }
-            updateListUsers(results);
         }
+        updateListUsers(results);
 
     }
 

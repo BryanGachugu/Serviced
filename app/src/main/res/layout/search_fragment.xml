@@ -91,7 +91,6 @@
                         android:maxLines="1"
                         android:paddingStart="15dp"
                         android:paddingEnd="60dp"
-                        android:text="@string/lorem_ipsum"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
                         tools:ignore="Autofill" />
