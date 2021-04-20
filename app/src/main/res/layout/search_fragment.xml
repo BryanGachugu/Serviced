@@ -81,6 +81,7 @@
                     android:elevation="10dp"
                     android:fontFamily="@font/crimson_text"
                     android:hint="Search..."
+                    android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="15dp"
