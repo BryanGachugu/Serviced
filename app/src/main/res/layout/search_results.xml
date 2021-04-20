@@ -1,9 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:padding="10dp">
 
-    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_search_dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/test_1" />
+
+        <RelativeLayout
+            android:id="@+id/names_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toStartOf="@+id/search_rating_layout"
+            android:layout_toEndOf="@id/img_search_dp">
+
+            <TextView
+                android:id="@+id/txt_provider_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/crimson_text"
+                android:maxLines="1"
+                android:text="Bryan Gachugu"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_provider_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_provider_name"
+                android:ellipsize="end"
+                android:fontFamily="@font/crimson_text"
+                android:maxLines="1"
+                android:text="Java Developer "
+                android:textColor="@color/purple_700"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_provider_service"
+                android:layout_gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/provider_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="27"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="Km away"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/search_rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_align="@+id/names_layout"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:paddingEnd="10dp">
+
+            <LinearLayout
+                android:id="@+id/jobInfoLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/provider_number_of_jobs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="85210"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="Jobs"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/provider_rating_bar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jobInfoLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="end"
+                android:progressTint="@color/light_blue"
+                android:rating="4" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/provider_rating_bar"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/provider_number_of_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="749798"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/crimson_text"
+                    android:maxLines="1"
+                    android:text="Reviews"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_provider_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/crimson_text"
+        android:maxLines="3"
+        android:text="@string/lorem_ipsum"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 </LinearLayout>
