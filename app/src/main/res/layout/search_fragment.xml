@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/smokey_white"
-            app:contentScrim="#375de4"
+            app:contentScrim="@color/light_blue"
             app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
@@ -110,7 +110,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/light_blue"
                 app:title="@string/search"
                 app:titleTextColor="@color/white" />
