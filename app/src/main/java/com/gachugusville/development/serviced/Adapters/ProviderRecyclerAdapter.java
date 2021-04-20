@@ -16,6 +16,8 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecyclerAdapter.SearchedProviderViewHolder> {
 
     List<Provider> searchList;
@@ -45,6 +47,10 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
     }
 
     public static class SearchedProviderViewHolder extends RecyclerView.ViewHolder {
+
+        CircleImageView img_search_dp;
+        TextView txt_provider_name, txt_provider_service, user_pay_rate_currency,
+                user_pay_rate_value, user_pay_rate_duration, integer_likes;
 
         public SearchedProviderViewHolder(@NonNull View itemView) {
             super(itemView);
