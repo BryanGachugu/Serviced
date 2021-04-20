@@ -71,24 +71,42 @@
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/edt_search_string"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_white_edit_text"
-                    android:drawableEnd="@drawable/search_btn"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/crimson_text"
-                    android:hint="Search..."
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="5dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    tools:ignore="Autofill" />
+                    android:background="@android:color/transparent">
+
+                    <EditText
+                        android:id="@+id/edt_search_string"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_white_edit_text"
+                        android:elevation="10dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/crimson_text"
+                        android:hint="Search..."
+                        android:imeOptions="actionNone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="60dp"
+                        android:text="@string/lorem_ipsum"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        tools:ignore="Autofill" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/search_icon" />
+
+                </RelativeLayout>
+
             </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -107,10 +125,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/search_RC"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_RC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </androidx.core.widget.NestedScrollView>
 

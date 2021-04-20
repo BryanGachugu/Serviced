@@ -87,7 +87,6 @@
             android:id="@+id/search_rating_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_align="@+id/names_layout"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="end"

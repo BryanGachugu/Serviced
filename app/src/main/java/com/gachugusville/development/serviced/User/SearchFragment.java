@@ -51,7 +51,9 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_search_string.requestFocus(edt_search_string.getText().toString().length());
                 searchUsers(edt_search_string.getText().toString());
+
             }
 
             @Override
@@ -103,7 +105,7 @@ public class SearchFragment extends Fragment {
 
     private void updateListUsers(ArrayList<Provider> listUsers) {
 
-        // Sort the list by date
+        // Sort the list by rating
         Collections.sort(listUsers, new Comparator<Provider>() {
             @Override
             public int compare(Provider o1, Provider o2) {
