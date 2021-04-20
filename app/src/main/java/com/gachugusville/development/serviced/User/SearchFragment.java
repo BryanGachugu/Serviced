@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.gachugusville.development.serviced.Adapters.ProviderRecyclerAdapter;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -23,13 +27,21 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    FirebaseFirestore db;
+    private FirebaseFirestore db;
     private List<Provider> listProviders;
+    private ProviderRecyclerAdapter providerRecyclerAdapter;
+    private RecyclerView search_RC;
+    private EditText edt_user_name;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         db = FirebaseFirestore.getInstance();
+        search_RC = view.findViewById(R.id.search_RC);
+        edt_user_name = view.findViewById(R.id.edt_user_name);
+
+        
 
         return view;
 
@@ -54,7 +66,7 @@ public class SearchFragment extends Fragment {
                             Provider provider = doc.toObject(Provider.class);
                             listProviders.add(provider);
                         }
-                        updateListUsers(listProviders);
+                        updateListUsers((ArrayList<Provider>) listProviders);
                     }
                 });
     }
@@ -64,8 +76,8 @@ public class SearchFragment extends Fragment {
             recherche = recherche.substring(0, 1).toUpperCase() + recherche.substring(1).toLowerCase();
 
         ArrayList<Provider> results = new ArrayList<>();
-        for(Provider provider : listProviders){
-            if(provider.getUser_name() != null && provider.getUser_name().contains(recherche)){
+        for (Provider provider : listProviders) {
+            if (provider.getUser_name() != null && provider.getUser_name().contains(recherche)) {
                 results.add(provider);
             }
         }
@@ -86,12 +98,11 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        userRecyclerAdapter = new UserRecyclerAdapter(listUsers, InvitationActivity.this, this);
-        rvUsers.setNestedScrollingEnabled(false);
-        rvUsers.setAdapter(userRecyclerAdapter);
-        layoutManagerUser = new LinearLayoutManager(getApplicationContext());
-        rvUsers.setLayoutManager(layoutManagerUser);
-        userRecyclerAdapter.notifyDataSetChanged();
+        providerRecyclerAdapter = new ProviderRecyclerAdapter(listUsers, getContext());
+        search_RC.setNestedScrollingEnabled(true);
+        search_RC.setAdapter(providerRecyclerAdapter);
+        search_RC.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        providerRecyclerAdapter.notifyDataSetChanged();
     }
 
 }
