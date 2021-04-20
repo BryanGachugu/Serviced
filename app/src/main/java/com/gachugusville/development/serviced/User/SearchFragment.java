@@ -1,6 +1,8 @@
 package com.gachugusville.development.serviced.User;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,7 @@ public class SearchFragment extends Fragment {
     private List<Provider> listProviders;
     private ProviderRecyclerAdapter providerRecyclerAdapter;
     private RecyclerView search_RC;
-    private EditText edt_user_name;
+    private EditText edt_search_string;
 
     @Nullable
     @Override
@@ -39,9 +41,24 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         db = FirebaseFirestore.getInstance();
         search_RC = view.findViewById(R.id.search_RC);
-        edt_user_name = view.findViewById(R.id.edt_user_name);
+        edt_search_string = view.findViewById(R.id.edt_search_string);
 
-        
+        edt_search_string.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchUsers(edt_search_string.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                searchUsers(edt_search_string.getText().toString());
+            }
+        });
 
         return view;
 
