@@ -44,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
                     fragment = new HomeFragment();
                     break;
                 case search_bottom_nav:
-                    startActivity(new Intent(this, SearchFragment.class));
+                    fragment = new SearchFragment();
                     break;
                 case message_bottom_nav:
                     fragment = new MessagesFragment();
