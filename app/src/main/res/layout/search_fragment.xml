@@ -110,7 +110,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="?android:attr/toolbarStyle"
                 android:background="@color/light_blue"
                 app:title="@string/search"
                 app:titleTextColor="@color/white" />
