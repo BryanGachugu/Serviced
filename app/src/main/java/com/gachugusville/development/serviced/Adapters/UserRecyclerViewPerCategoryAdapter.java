@@ -2,6 +2,8 @@ package com.gachugusville.development.serviced.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.R;
+import com.gachugusville.development.serviced.User.ProviderDetailsActivity;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
@@ -41,9 +44,12 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
     @Override
     public void onBindViewHolder(@NonNull ViewHolderUsersHorizontal holder, int position) {
         holder.user_in_card_layout.setOnClickListener(v -> {
-            //TODO display user details activity
-            Toast.makeText(context, holder.documentId, Toast.LENGTH_SHORT).show();
-            Log.d("DocId", holder.documentId);
+           Intent intent = new Intent(context, ProviderDetailsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("provider_user_name", providersList.get(position).getUser_name());
+            bundle.putString("provider_brand_name", providersList.get(position).getBrand_name());
+            context.startActivity(intent, bundle);
+
         });
 
         //TODO  set these values as those of the providers in the database

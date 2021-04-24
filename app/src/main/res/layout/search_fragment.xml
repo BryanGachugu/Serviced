@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/top_corners_style"
+                android:elevation="2dp"
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
                 android:paddingBottom="20dp">
@@ -32,7 +33,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/crimson_text"
                     android:text="Search for services, service providers or needed skills"
@@ -110,9 +111,10 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/toolbarStyle"
+                android:layout_height="wrap_content"
                 android:background="@color/light_blue"
                 app:title="@string/search"
+                app:subtitleTextColor="@color/white"
                 app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
