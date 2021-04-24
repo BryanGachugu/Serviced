@@ -25,7 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/top_corners_style"
-                android:elevation="2dp"
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
                 android:paddingBottom="20dp">

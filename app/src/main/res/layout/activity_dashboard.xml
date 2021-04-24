@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_bottom_nav"
         app:elevation="5dp"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
