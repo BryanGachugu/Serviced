@@ -5,8 +5,9 @@
     tools:ignore="AllowBackup">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -16,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Serviced"
         tools:ignore="AllowBackup">
+        <activity android:name=".User.ProviderDetailsActivity"></activity>
         <activity
             android:name=".Common.SplashScreen"
             android:theme="@style/SplashScreenTheme">
