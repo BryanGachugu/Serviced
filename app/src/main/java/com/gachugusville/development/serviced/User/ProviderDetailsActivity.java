@@ -1,8 +1,10 @@
 package com.gachugusville.development.serviced.User;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.gachugusville.development.serviced.R;
 
 public class ProviderDetailsActivity extends AppCompatActivity {
 
