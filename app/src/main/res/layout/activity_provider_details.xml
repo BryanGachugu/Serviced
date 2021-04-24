@@ -1,122 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fadingEdgeLength="70dp"
-    android:scrollbars="none"
-    tools:context=".User.ProviderDetailsActivity">
+    android:orientation="vertical"
+    tools:context="com.gachugusville.development.serviced.User.ProviderDetailsActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/smokey_white">
+        android:backgroundTint="@color/light_blue"
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <ImageView
+            android:id="@+id/details_back_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@id/details_back_btn"
+            android:layout_alignBottom="@+id/details_back_btn"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/crimson_text"
+            android:text="Bryan Gachugu"
+          android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/smokey_white"
-            app:contentScrim="@color/light_blue"
-            app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+            android:background="@color/smokey_white">
 
-            <LinearLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/top_corners_style"
-                android:orientation="vertical"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/crimson_text"
-                    android:text="Search for services, service providers or needed skills"
-                    android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                android:background="@color/smokey_white"
+                app:contentScrim="@color/light_blue"
+                app:expandedTitleTextAppearance="@style/expandedBarTextStyle"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:background="@drawable/top_corners_style"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingBottom="20dp">
 
-                    <TextView
-                        android:id="@+id/txt_providers_around"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:background="@android:color/transparent"
-                        android:text="157"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/test_1"
+                        android:backgroundTint="@android:color/transparent"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/crimson_text"
-                        android:text="service providers around your area"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        <TextView
+                            android:id="@+id/txt_providers_around"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:text="Bryan Gachugu"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/crimson_text"
+                            android:text="Software developer"
+                            android:layout_gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="22sp" />
 
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/transparent">
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-                    <EditText
-                        android:id="@+id/edt_search_string"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/bg_white_edit_text"
-                        android:elevation="10dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/crimson_text"
-                        android:hint="Search..."
-                        android:imeOptions="actionNone"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="60dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        tools:ignore="Autofill" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="15dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/search_icon" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-                </RelativeLayout>
+        
 
-            </LinearLayout>
+    </ScrollView>
 
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/toolbarStyle"
-                android:background="@color/light_blue"
-                app:title="@string/search"
-                app:titleTextColor="@color/white" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
