@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
             FirebaseFirestore.getInstance().collection("Users").document(Uid).get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            country = documentSnapshot.toObject(User.class).getCountry();
+                            country = Objects.requireNonNull(documentSnapshot.toObject(User.class)).getCountry();
                         }
                     });
         }

@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.gachugusville.development.serviced.Common.User;
-import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.User.DashboardActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -67,7 +66,6 @@ public class SignUpThirdActivity extends AppCompatActivity {
         });
 
         checkLocationPermission();
-
         retailer_signUp_back_btn.setOnClickListener(v -> SignUpThirdActivity.super.onBackPressed());
     }
 
@@ -77,7 +75,6 @@ public class SignUpThirdActivity extends AppCompatActivity {
         User.getInstance().setPhone_number(getIntent().getStringExtra("phone_number"));
         User.getInstance().setProfile_picture_url(null);
         User.getInstance().setEmail(edt_email.getText().toString());
-        User.getInstance().setCountry("Kenya");
         User.getInstance().setReviews(null);
 
         db.collection("Users")
@@ -141,10 +138,10 @@ public class SignUpThirdActivity extends AppCompatActivity {
                 // location-related task you need to do.
                 getLocation();
             } else {
-
+                //TODO, use Google location manual input
                 User.getInstance().setCountry("United States");
-               User.getInstance().setLongitude(0);
-               User.getInstance().setLatitude(0);
+                User.getInstance().setLongitude(0);
+                User.getInstance().setLatitude(0);
 
             }
         }

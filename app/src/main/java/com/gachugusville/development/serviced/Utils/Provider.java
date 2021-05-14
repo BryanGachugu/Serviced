@@ -1,10 +1,11 @@
 package com.gachugusville.development.serviced.Utils;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ca.antonious.materialdaypicker.MaterialDayPicker;
 
-public class Provider {
+public class Provider implements Serializable {
 
     private static Provider provider;
 
@@ -20,12 +21,13 @@ public class Provider {
     }
 
     String documentId;
-    String user_name, brand_name, service_category, service_identity, personal_description,
+    String user_name = "", brand_name = "", service_category = "", service_identity, personal_description,
             short_note_to_users, phone, ref_url1, ref_url2, email, country;
     List<ProviderReviews> reviews;
+    List<Skills> skillsList;
     List<String> provider_skills;
     List<MaterialDayPicker.Weekday> days_available;
-    String profile_pic_url = "";
+    String profile_pic_url = "", provider_cover_photo_url = "";
     boolean available_country_wide, always_available, isGoogleAuth, isRegistrationFinished;
     int total_rating = 0;
     float rating = 0f;
@@ -35,8 +37,8 @@ public class Provider {
     double estimated_earnings = 0, latitude = 0, longitude = 0;
 
     private Provider(String user_name, String brand_name, String service_category, String service_identity, String personal_description,
-                     String short_note_to_users, String phone, double latitude, double longitude, String profile_pic_url, String ref_url1, String ref_url2, String email, String country, List<ProviderReviews> reviews, List<String> provider_skills,
-                     List<MaterialDayPicker.Weekday> days_available, boolean available_country_wide,
+                     String short_note_to_users, String phone, double latitude, double longitude, String profile_pic_url, String provider_cover_photo_url, String ref_url1, String ref_url2, String email, String country, List<ProviderReviews> reviews, List<String> provider_skills,
+                     List<Skills> skillsList, List<MaterialDayPicker.Weekday> days_available, boolean available_country_wide,
                      boolean always_available, boolean isGoogleAuth, boolean isRegistrationFinished, int total_rating, float rating, int time_available_from, int time_available_to, int reach_in_distance,
                      int jobs_done, int account_views, int number_of_reviews, int number_of_profile_likes, double estimated_earnings) {
         this.user_name = user_name;
@@ -48,12 +50,14 @@ public class Provider {
         this.phone = phone;
         this.latitude = latitude;
         this.profile_pic_url = profile_pic_url;
+        this.provider_cover_photo_url = provider_cover_photo_url;
         this.ref_url1 = ref_url1;
         this.ref_url2 = ref_url2;
         this.email = email;
         this.country = country;
         this.longitude = longitude;
         this.reviews = reviews;
+        this.skillsList = skillsList;
         this.provider_skills = provider_skills;
         this.days_available = days_available;
         this.available_country_wide = available_country_wide;
@@ -148,6 +152,14 @@ public class Provider {
         return profile_pic_url;
     }
 
+    public String getProvider_cover_photo_url() {
+        return provider_cover_photo_url;
+    }
+
+    public void setProvider_cover_photo_url(String provider_cover_photo_url) {
+        this.provider_cover_photo_url = provider_cover_photo_url;
+    }
+
     public void setProfile_pic_url(String profile_pic_url) {
         this.profile_pic_url = profile_pic_url;
     }
@@ -166,6 +178,14 @@ public class Provider {
 
     public void setReviews(List<ProviderReviews> reviews) {
         this.reviews = reviews;
+    }
+
+    public List<Skills> getSkillsList() {
+        return skillsList;
+    }
+
+    public void setSkillsList(List<Skills> skillsList) {
+        this.skillsList = skillsList;
     }
 
     public List<String> getProvider_skills() {
@@ -257,7 +277,9 @@ public class Provider {
     }
 
     public float getRating() {
-
+        if (number_of_reviews == 0) {
+            rating = 0;
+        } else rating = (float) (total_rating / number_of_reviews);
         return rating;
     }
 

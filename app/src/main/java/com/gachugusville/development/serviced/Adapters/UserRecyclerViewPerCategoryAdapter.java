@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,11 +42,11 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
     @Override
     public void onBindViewHolder(@NonNull ViewHolderUsersHorizontal holder, int position) {
         holder.user_in_card_layout.setOnClickListener(v -> {
-           Intent intent = new Intent(context, ProviderDetailsActivity.class);
+            Intent intent = new Intent(context, ProviderDetailsActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putString("provider_user_name", providersList.get(position).getUser_name());
-            bundle.putString("provider_brand_name", providersList.get(position).getBrand_name());
-            context.startActivity(intent, bundle);
+            bundle.putSerializable("provider_instance", providersList.get(position));
+            intent.putExtras(bundle);
+            context.startActivity(intent);
 
         });
 
@@ -97,11 +95,10 @@ public class UserRecyclerViewPerCategoryAdapter extends RecyclerView.Adapter<Use
         String documentId;
         String highest_education_certification;
         String certificate_attained;
-        int age;
         ImageView user_cover_photo;
         TextView user_name_in_card, txt_userService, user_pay_rate_currency,
                 user_pay_rate_value, user_pay_rate_duration, integer_likes;
-        MaterialCardView top_cert, user_in_card_layout;
+        MaterialCardView user_in_card_layout;
 
         public ViewHolderUsersHorizontal(@NonNull View itemView) {
             super(itemView);

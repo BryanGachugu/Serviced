@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaos.view.PinView;
-import com.gachugusville.development.serviced.User.DashboardActivity;
 import com.gachugusville.development.serviced.Main.MainActivity;
 import com.gachugusville.development.serviced.R;
 import com.google.android.material.button.MaterialButton;
@@ -56,7 +55,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
         //receive phone number from previous activity
         //TODO remove this line and the buttons
-        btn_verify_code.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignUpSecondActivity.class)));
+        btn_verify_code.setOnClickListener(v -> verifyCode(pin_view.getText().toString()));
 
         Intent intent = getIntent();
         phone_number_string = intent.getStringExtra("phone_number");
