@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.OkHttpClient;
 
 public class ProviderDetailsActivity extends AppCompatActivity {
 
@@ -80,9 +79,6 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         reviews_rc = findViewById(R.id.reviews_rc);
         customDialog = new CustomDialog(this);
         getDetails();
-        getReviews();
-        sendSms();
-
 
         findViewById(R.id.message_btn).setOnClickListener(v -> {
             Intent intent = new Intent(this, UserMapActivity.class);
@@ -119,7 +115,6 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String Uid = provider.getDocumentId();
         db.collection("Providers").document(Uid).collection("reviews")
-                .limit(10)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Log.d("Error", Objects.requireNonNull(error.getMessage()));
@@ -135,24 +130,13 @@ public class ProviderDetailsActivity extends AppCompatActivity {
                 });
     }
 
-    private void sendSms() {
-
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("+254792432505"),
-                "MGd04ab249804fc6028c34e7b6308c7fe1",
-                "New job from brian")
-                .create();
-
-    }
-
 
     private void requestJob() {
         //TODO a lot of customizations
         customDialog.startDialog();
         String customerUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        JobRequestModel jobRequest = new JobRequestModel(customerUid, User.getInstance().getFirst_name(),
-                "inProgress", "perJob", 500.0);
+        JobRequestModel jobRequest = new JobRequestModel(customerUid, "https://s.abcnews.com/images/GMA/beb-rexha-file-gty-jef-200224_hpMain_1x1_608.jpg",
+                "Kate Winslet", "Writing", "pending", "Per Hour", 200, 0);
 
         FirebaseFirestore.getInstance().collection("Providers").document(provider.getDocumentId())
                 .collection("Jobs")
@@ -231,6 +215,7 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         txt_provider_numOf_likes.setText(String.valueOf(provider.getNumber_of_profile_likes()));
 
         getSkills();
+        getReviews();
         calculateDistanceBetweenClientAndProvider();
 
     }
@@ -239,7 +224,7 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         skills = new ArrayList<>();
         providerSkillsAdapter = new ProviderSkillsAdapter(skills, this);
         provider_skills_rc.setHasFixedSize(true);
-        provider_skills_rc.setLayoutManager(new GridLayoutManager(this, GridLayoutManager.DEFAULT_SPAN_COUNT));
+        provider_skills_rc.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         provider_skills_rc.setAdapter(providerSkillsAdapter);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {

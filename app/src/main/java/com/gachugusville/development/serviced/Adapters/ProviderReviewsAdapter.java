@@ -75,6 +75,9 @@ public class ProviderReviewsAdapter extends RecyclerView.Adapter<ProviderReviews
 
     @Override
     public int getItemCount() {
+        if (reviewsList == null) {
+            return 0;
+        }
         return reviewsList.size();
     }
 

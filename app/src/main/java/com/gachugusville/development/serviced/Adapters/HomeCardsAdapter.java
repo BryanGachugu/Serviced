@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.Main.HomeCard;
 import com.gachugusville.development.serviced.R;
 import com.gachugusville.development.serviced.Utils.Provider;
@@ -55,48 +54,26 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
 
-        if (!User.getInstance().getCountry().isEmpty()) {
-            FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
-            mFirebaseFirestore.collection("Providers")
-                    .whereEqualTo("country", User.getInstance().getCountry())
-                    .limit(10)
-                    .addSnapshotListener((value, error) -> {
-                        if (error != null) {
-                            Log.d("Error", Objects.requireNonNull(error.getMessage()));
+        FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
+        mFirebaseFirestore.collection("Providers")
+                .limit(10)
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        Log.d("Error", Objects.requireNonNull(error.getMessage()));
+                    }
+                    assert value != null;
+                    for (DocumentChange documentChange : value.getDocumentChanges()) {
+                        if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                            final Provider provider = documentChange.getDocument().toObject(Provider.class);
+                            provider.setDocumentId(documentChange.getDocument().getId());
+                            Log.d("Doc_IdFromDb = ", documentChange.getDocument().getId());
+                            providers.add(provider);
+                            userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
                         }
-                        assert value != null;
-                        for (DocumentChange documentChange : value.getDocumentChanges()) {
-                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                final Provider provider = documentChange.getDocument().toObject(Provider.class);
-                                provider.setDocumentId(documentChange.getDocument().getId());
-                                providers.add(provider);
-                                userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
-        } else {
-            FirebaseFirestore mFirebaseFirestore = FirebaseFirestore.getInstance();
-            mFirebaseFirestore.collection("Providers")
-                    .limit(10)
-                    .addSnapshotListener((value, error) -> {
-                        if (error != null) {
-                            Log.d("Error", Objects.requireNonNull(error.getMessage()));
-                        }
-                        assert value != null;
-                        for (DocumentChange documentChange : value.getDocumentChanges()) {
-                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                final Provider provider = documentChange.getDocument().toObject(Provider.class);
-                                provider.setDocumentId(documentChange.getDocument().getId());
-                                Log.d("Doc_IdFromDb = ", documentChange.getDocument().getId());
-                                providers.add(provider);
-                                userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
+                    }
+                });
 
-            //If there are no users in a Category, set its view to Gone
-
-        }
+        //If there are no users in a Category, set its view to Gone
     }
 
     @Override
