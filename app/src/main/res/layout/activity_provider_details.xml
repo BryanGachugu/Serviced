@@ -291,6 +291,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="Reviews"
+                android:textAlignment="center"
+                android:textColor="@color/light_blue"
+                android:textSize="22sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviews_rc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -312,7 +327,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
                 android:fontFamily="@font/crimson_text"
-                android:text="Call"
+                android:text="@string/call"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -320,13 +335,14 @@
                 app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/message_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
                 android:fontFamily="@font/crimson_text"
-                android:text="Message"
+                android:text="@string/message"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="18sp"

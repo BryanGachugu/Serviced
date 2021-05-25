@@ -36,11 +36,12 @@ public class Provider implements Serializable {
     int jobs_done = 0, account_views = 0, number_of_reviews = 0, number_of_profile_likes = 0;
     double estimated_earnings = 0, latitude = 0, longitude = 0;
 
-    private Provider(String user_name, String brand_name, String service_category, String service_identity, String personal_description,
+    private Provider(String documentId, String user_name, String brand_name, String service_category, String service_identity, String personal_description,
                      String short_note_to_users, String phone, double latitude, double longitude, String profile_pic_url, String provider_cover_photo_url, String ref_url1, String ref_url2, String email, String country, List<ProviderReviews> reviews, List<String> provider_skills,
                      List<Skills> skillsList, List<MaterialDayPicker.Weekday> days_available, boolean available_country_wide,
                      boolean always_available, boolean isGoogleAuth, boolean isRegistrationFinished, int total_rating, float rating, int time_available_from, int time_available_to, int reach_in_distance,
                      int jobs_done, int account_views, int number_of_reviews, int number_of_profile_likes, double estimated_earnings) {
+        this.documentId = documentId;
         this.user_name = user_name;
         this.brand_name = brand_name;
         this.service_category = service_category;

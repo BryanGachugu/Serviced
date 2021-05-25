@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.ViewHolderCards> {
+
     private final List<HomeCard> homeCardList;
     private final Context context;
 
@@ -47,6 +48,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
         holder.txt_see_all.setText(txt_see_all);
 
         holder.home_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
+
         List<Provider> providers = new ArrayList<>();
         UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(providers, context);
         holder.users_per_category_rcView.setHasFixedSize(true);
@@ -65,7 +67,9 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                         assert value != null;
                         for (DocumentChange documentChange : value.getDocumentChanges()) {
                             if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                providers.add(documentChange.getDocument().toObject(Provider.getInstance().getClass()));
+                                final Provider provider = documentChange.getDocument().toObject(Provider.class);
+                                provider.setDocumentId(documentChange.getDocument().getId());
+                                providers.add(provider);
                                 userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
                             }
                         }
@@ -83,6 +87,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                             if (documentChange.getType() == DocumentChange.Type.ADDED) {
                                 final Provider provider = documentChange.getDocument().toObject(Provider.class);
                                 provider.setDocumentId(documentChange.getDocument().getId());
+                                Log.d("Doc_IdFromDb = ", documentChange.getDocument().getId());
                                 providers.add(provider);
                                 userRecyclerViewPerCategoryAdapter.notifyDataSetChanged();
                             }
