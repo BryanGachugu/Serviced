@@ -1,19 +1,20 @@
 package com.gachugusville.development.serviced.Adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.R;
+import com.gachugusville.development.serviced.User.ProviderDetailsActivity;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.squareup.picasso.Picasso;
 
@@ -42,15 +43,18 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
     @Override
     public void onBindViewHolder(@NonNull SearchedProviderViewHolder holder, int position) {
         holder.provider_in_search_result_layout.setOnClickListener(v -> {
-            //context.startActivity(new Intent(context, ProviderDetailsActivity.class));
-            Toast.makeText(context, searchList.get(position).getUser_name(), Toast.LENGTH_SHORT).show();
-            Log.d("Search works", searchList.get(position).getPersonal_description());
+            Intent intent = new Intent(context, ProviderDetailsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("FROM_ACTIVITY", "Search");
+            bundle.putSerializable("provider_instance", searchList.get(position));
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         });
-       if (!searchList.get(position).getProfile_pic_url().equals("")){
-           Picasso.get()
-                   .load(searchList.get(position).getProfile_pic_url())
-                   .into(holder.img_search_dp);
-       }
+        if (!searchList.get(position).getProfile_pic_url().equals("")) {
+            Picasso.get()
+                    .load(searchList.get(position).getProfile_pic_url())
+                    .into(holder.img_search_dp);
+        }
 
         holder.txt_provider_name.setText(searchList.get(position).getUser_name());
         holder.txt_provider_service.setText(searchList.get(position).getService_identity());

@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         //initialize our views
         toProvidersApp = view.findViewById(R.id.toProvidersApp);
-        bottom_nav = Objects.requireNonNull(getActivity()).findViewById(R.id.bottom_nav);
+        bottom_nav = requireActivity().findViewById(R.id.bottom_nav);
         db = FirebaseFirestore.getInstance();
         lading_page_rcView = view.findViewById(R.id.lading_page_rcView);
 

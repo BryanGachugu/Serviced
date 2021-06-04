@@ -3,6 +3,7 @@ package com.gachugusville.development.serviced.User;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.CompletionHandler;
+import com.algolia.search.saas.Index;
+import com.algolia.search.saas.Query;
 import com.gachugusville.development.serviced.Adapters.ProviderRecyclerAdapter;
 import com.gachugusville.development.serviced.R;
+import com.gachugusville.development.serviced.Utils.Constants;
 import com.gachugusville.development.serviced.Utils.Provider;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchFragment extends Fragment {
     private FirebaseFirestore db;
@@ -34,6 +41,10 @@ public class SearchFragment extends Fragment {
     private ProviderRecyclerAdapter providerRecyclerAdapter;
     private RecyclerView search_RC;
     private EditText edt_search_string;
+    private Index index;
+
+    public SearchFragment() {
+    }
 
     @Nullable
     @Override
@@ -42,7 +53,12 @@ public class SearchFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         search_RC = view.findViewById(R.id.search_RC);
         edt_search_string = view.findViewById(R.id.edt_search_string);
+        listProviders = new ArrayList<>();
         getProviders();
+
+        Client client = new Client(Constants.ALGOLIA_APP_ID, Constants.ALGOLIA_API_KEY);
+        index = client.getIndex("serviced_PROVIDERS");
+
 
         edt_search_string.addTextChangedListener(new TextWatcher() {
             @Override
@@ -52,14 +68,33 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_search_string.requestFocus(edt_search_string.getText().toString().length());
-                searchUsers(edt_search_string.getText().toString());
+                CompletionHandler completionHandler = (content, error1) -> {
+                    try {
+                        if (content != null) {
+                            JSONArray hits = content.getJSONArray("hits");
+                            for (int i = 0; i < hits.length(); i++) {
+                                JSONObject providerJSON = hits.getJSONObject(i);
+                                final Provider provider = new Provider();
+                                setFields(providerJSON, provider);
 
+                            }
+                        } else {
+                            //TODO NO RESULTS
+                            Log.d("Results_Empty", "EMPTY");
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                };
+                index.searchAsync(new Query(edt_search_string.getText().toString()),
+                        completionHandler);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                searchUsers(edt_search_string.getText().toString());
+
             }
         });
 
@@ -67,63 +102,40 @@ public class SearchFragment extends Fragment {
 
     }
 
+    private void setFields(JSONObject providerJSON, Provider provider) throws JSONException {
+        //TODO JUST GET THE ID
+        //provider.setDocumentId("riyzdfbhklxcrs;djfkc ");
+        //provider.setProvider_cover_photo_url("jkyashdbkhlsd");
+        provider.setUser_name(providerJSON.get("user_name").toString());
+        provider.setBrand_name(providerJSON.getString("brand_name"));
+        provider.setService_identity(providerJSON.getString("service_identity"));
+        provider.setPersonal_description(providerJSON.get("personal_description").toString());
+
+
+    }
+
     private void getProviders() {
         db.collection("Providers")
                 .limit(10)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshots,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            System.err.println("Listen failed:" + e);
-                            return;
-                        }
-
-                        listProviders = new ArrayList<>();
-
-                        for (DocumentSnapshot doc : snapshots) {
-                            Provider provider = doc.toObject(Provider.class);
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        Log.d("Error", Objects.requireNonNull(error.getMessage()));
+                    }
+                    assert value != null;
+                    for (DocumentChange documentChange : value.getDocumentChanges()) {
+                        if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                            final Provider provider = documentChange.getDocument().toObject(Provider.class);
+                            provider.setDocumentId(documentChange.getDocument().getId());
+                            Log.d("Doc_IdFromDb = ", documentChange.getDocument().getId());
                             listProviders.add(provider);
+                            providerRecyclerAdapter = new ProviderRecyclerAdapter(listProviders, getContext());
+                            search_RC.setNestedScrollingEnabled(true);
+                            search_RC.setAdapter(providerRecyclerAdapter);
+                            search_RC.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                            providerRecyclerAdapter.notifyDataSetChanged();
                         }
-                        updateListUsers((ArrayList<Provider>) listProviders);
                     }
                 });
-    }
-
-    private void searchUsers(String recherche) {
-        if (recherche.length() > 0)
-            recherche = recherche.substring(0, 1).toUpperCase() + recherche.substring(1).toLowerCase();
-
-        ArrayList<Provider> results = new ArrayList<>();
-
-            for (Provider provider : listProviders) {
-                if (provider.getUser_name() != null && provider.getUser_name().contains(recherche)) {
-                    results.add(provider);
-                }
-        }
-        updateListUsers(results);
-
-    }
-
-    private void updateListUsers(ArrayList<Provider> listUsers) {
-
-        // Sort the list by rating
-        Collections.sort(listUsers, new Comparator<Provider>() {
-            @Override
-            public int compare(Provider o1, Provider o2) {
-                int res = -1;
-                if (o1.getRating() > (o2.getRating())) {
-                    res = 1;
-                }
-                return res;
-            }
-        });
-
-        providerRecyclerAdapter = new ProviderRecyclerAdapter(listUsers, getContext());
-        search_RC.setNestedScrollingEnabled(true);
-        search_RC.setAdapter(providerRecyclerAdapter);
-        search_RC.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        providerRecyclerAdapter.notifyDataSetChanged();
     }
 
 }

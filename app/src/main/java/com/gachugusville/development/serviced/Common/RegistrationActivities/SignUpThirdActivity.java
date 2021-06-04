@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,7 +79,7 @@ public class SignUpThirdActivity extends AppCompatActivity {
         User.getInstance().setReviews(null);
 
         db.collection("Users")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .set(User.getInstance())
                 .addOnSuccessListener(aVoid -> startActivity(new Intent(getApplicationContext(), DashboardActivity.class)))
                 .addOnFailureListener(e -> Toast.makeText(SignUpThirdActivity.this, "An error occurred", Toast.LENGTH_SHORT).show());

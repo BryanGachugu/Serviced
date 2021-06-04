@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,15 +25,15 @@ import com.gachugusville.development.serviced.Utils.Provider;
 import com.gachugusville.development.serviced.Utils.ProviderReviews;
 import com.gachugusville.development.serviced.Utils.Skills;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
+
+import org.infobip.mobile.messaging.Message;
+import org.infobip.mobile.messaging.MobileMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +49,7 @@ public class ProviderDetailsActivity extends AppCompatActivity {
     private ProviderSkillsAdapter providerSkillsAdapter;
     private RecyclerView reviews_rc;
     private RecyclerView provider_skills_rc;
-    public static final String ACCOUNT_SID = "AC6eeeead7f60b007a3097a9a2be09a576";
-    public static final String AUTH_TOKEN = "010b70af1ba401a150541af86999b782";
-    private static final String phoneTo = "+254792432505";
-    private static final String phoneFrom = "+12147314589";
+
     private CustomDialog customDialog;
     private List<Skills> skills;
     private CircleImageView provider_profile;
@@ -80,7 +76,13 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         customDialog = new CustomDialog(this);
         getDetails();
 
+        new MobileMessaging
+                .Builder(getApplication())
+                .build();
+
         findViewById(R.id.message_btn).setOnClickListener(v -> {
+            sendSmS();
+
             Intent intent = new Intent(this, UserMapActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("provider_data", provider);
@@ -103,6 +105,17 @@ public class ProviderDetailsActivity extends AppCompatActivity {
 
         updateData();
 
+    }
+
+    private void sendSmS() {
+        try {
+            Message message = new Message();
+            message.setDestination("+254792432505");
+            message.setBody("New Job from Bryan Gachugu");
+            MobileMessaging.getInstance(this).sendMessages(message);
+        } catch (Exception e){
+            Log.d("MESSAGE_ERROR", e.getLocalizedMessage());
+        }
     }
 
     private void getReviews() {
@@ -141,12 +154,9 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Providers").document(provider.getDocumentId())
                 .collection("Jobs")
                 .add(jobRequest)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(@NonNull DocumentReference documentReference) {
-                        customDialog.dismissDialog();
-                        Toast.makeText(ProviderDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    }
+                .addOnSuccessListener(documentReference -> {
+                    customDialog.dismissDialog();
+                    Toast.makeText(ProviderDetailsActivity.this, "Success", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -171,8 +181,9 @@ public class ProviderDetailsActivity extends AppCompatActivity {
 
     private void getDetails() {
         Intent intent = getIntent();
-        provider = (Provider) intent.getSerializableExtra("provider_instance");
-        handleReceivedDetails();
+            provider = (Provider) intent.getSerializableExtra("provider_instance");
+            handleReceivedDetails();
+
     }
 
     private void handleReceivedDetails() {
@@ -191,7 +202,7 @@ public class ProviderDetailsActivity extends AppCompatActivity {
                     .fit()
                     .into(provider_profile);
         }
-        if (provider.getProvider_cover_photo_url().isEmpty()) {
+        if (provider.getProfile_pic_url().isEmpty()) {
             //TODO Load default service category cover
             Log.d("Cover_missing for ", provider.getUser_name() + provider.getBrand_name());
         } else {
@@ -203,7 +214,7 @@ public class ProviderDetailsActivity extends AppCompatActivity {
             txt_provider_rating.setText(String.valueOf(provider.getRating()));
         } catch (Exception e) {
             txt_provider_rating.setError("error");
-            Log.d("rating_error for : ", provider.getUser_name());
+            Log.d("rating_error for : ", provider.getUser_name() + provider.getBrand_name());
         }
         try {
             txt_provider_numOf_reviews.setText(String.valueOf(provider.getNumber_of_reviews()));
