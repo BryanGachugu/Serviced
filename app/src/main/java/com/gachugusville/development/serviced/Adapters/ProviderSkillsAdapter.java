@@ -33,11 +33,10 @@ public class ProviderSkillsAdapter extends RecyclerView.Adapter<ProviderSkillsAd
 
     @Override
     public void onBindViewHolder(@NonNull ProviderSkillsAdapter.SkillViewHolder holder, int position) {
-        holder.txt_skill_name.setText(skillsList.get(position).getSkillName());
-        holder.txt_payValue.setText(String.format("$%s", skillsList.get(position).getPayValue()));
-        holder.txt_payDurationType.setText(skillsList.get(position).getPayDurationType());
-        holder.txt_experience.setText(String.valueOf(skillsList.get(position).getExperience()));
-        holder.txt_num_of_jobs.setText(String.valueOf(skillsList.get(position).getNum_of_jobs()));
+        holder.txt_skill_name.setText(skillsList.get(position).getSkill_identity());
+        holder.txt_payValue.setText(String.format("$%s", skillsList.get(position).getSkill_price()));
+        holder.txt_payDurationType.setText(skillsList.get(position).getSkill_pay_mode());
+        holder.txt_num_of_jobs.setText(String.valueOf(skillsList.get(position).getSkill_jobs_number()));
 
     }
 

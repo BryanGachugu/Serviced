@@ -72,5 +72,5 @@
     <string name="call">Request</string>
     <string name="message">Map</string>
     <string name="loading">Loading</string>
-    <string name="infobip_application_code" tools:ignore="TypographyDashes">233623e3c860b49ec69a464834343481-8bj4el4a-256d-23fd-56ad-b5bc3d568b53</string>
+    <string name="infobip_application_code">b32a23b0ff9bbb2f20b401555fa5df6e-4b156636-7437-44f8-9e15-f40a26efdcbd</string>
 </resources>

@@ -42,7 +42,18 @@ public class SplashScreen extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         try {
                             //Document exists, that means user data is available
-                            documentSnapshot.toObject(User.class);
+                            User.getInstance().setFirst_name(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getFirst_name());
+                            User.getInstance().setLast_name(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getLast_name());
+                            User.getInstance().setFirst_name(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getFirst_name());
+                            User.getInstance().setProfile_picture_url(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getProfile_picture_url());
+                            User.getInstance().setPhone_number(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getPhone_number());
+                            User.getInstance().setEmail(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getEmail());
+                            User.getInstance().setCountry(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getCountry());
+                            User.getInstance().setLatitude(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getLatitude());
+                            User.getInstance().setLongitude(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getLongitude());
+                            User.getInstance().setRating(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getRating());
+
+                            Log.d("UserClass", String.valueOf(User.getInstance().getLongitude()));
                         } catch (Exception e) {
                             Log.d("UserValueErrors", e.getMessage());
                         }
@@ -52,7 +63,7 @@ public class SplashScreen extends AppCompatActivity {
                         startActivity(new Intent(SplashScreen.this, SignUpSecondActivity.class));
                     }
                 })
-                .addOnFailureListener(e ->{
+                .addOnFailureListener(e -> {
                     Log.d("UserDataRetrieveError", e.getMessage());
                     //TODO make sure there is an active internet connection
                     //if there is no internet, the app continues with previous fetched data

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/black"
     android:scrollbars="none"
     tools:context="com.gachugusville.development.serviced.User.ProviderDetailsActivity">
 
@@ -88,7 +89,6 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/crimson_text"
-                android:text="25km away"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

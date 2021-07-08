@@ -32,7 +32,6 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
         this.context = context;
     }
 
-
     @NonNull
     @Override
     public SearchedProviderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
