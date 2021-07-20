@@ -25,8 +25,8 @@ public class SplashScreen extends AppCompatActivity {
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setStatusBarColor(getResources().getColor(R.color.light_blue));
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.light_blue));
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -53,13 +53,12 @@ public class SplashScreen extends AppCompatActivity {
                             User.getInstance().setLongitude(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getLongitude());
                             User.getInstance().setRating(Objects.requireNonNull(documentSnapshot.toObject(User.getInstance().getClass())).getRating());
 
-                            Log.d("UserClass", String.valueOf(User.getInstance().getLongitude()));
                         } catch (Exception e) {
                             Log.d("UserValueErrors", e.getMessage());
                         }
                         startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
                     } else {
-                        //This means user did not complete registration, take him to the activity just after authentication          genius right?
+                        //This means user did not complete registration, take him to the activity just after authentication
                         startActivity(new Intent(SplashScreen.this, SignUpSecondActivity.class));
                     }
                 })

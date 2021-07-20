@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/user_cover_photo"
-            android:layout_width="180dp"
-            android:layout_height="220dp"
+            android:layout_width="190dp"
+            android:layout_height="180dp"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -33,14 +33,15 @@
                 android:id="@+id/user_name_in_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:textSize="16dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/crimson_text"
                 android:maxLines="1"
                 android:text="My name is Bryan"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -48,95 +49,53 @@
         <TextView
             android:id="@+id/txt_userService"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="20dp"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:fontFamily="@font/crimson_text"
-            android:maxLines="1"
-            android:layout_weight="1"
-            android:text="I will design any website for you"
-            android:textColor="@color/black" />
+            android:maxLines="2"
+            android:text="I will design any website for you and it will look amazing"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/txt_pro_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:backgroundTint="@android:color/transparent"
+                android:drawableTint="@color/drawableTint"
+                android:fontFamily="@font/crimson_text"
+                android:gravity="center_vertical"
+                android:text="4.5"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/star_icon" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_favorite_24" />
 
-                <TextView
-                    android:id="@+id/integer_likes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:ellipsize="end"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/crimson_text"
-                    android:maxLines="1"
-                    android:text="252455"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/provider_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="2dp"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="5dp"
-                android:orientation="horizontal">
+                android:fontFamily="@font/crimson_text"
+                android:text="7827"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/user_pay_rate_currency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/crimson_text"
-                    android:text="Kes."
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/user_pay_rate_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/crimson_text"
-                    android:text="7827"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="/"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/user_pay_rate_duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/crimson_text"
-                    android:text="hr"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

@@ -1,7 +1,6 @@
 package com.gachugusville.development.serviced.User;
 
 import android.content.Intent;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,16 +48,7 @@ import com.squareup.picasso.Picasso;
 import org.infobip.mobile.messaging.Message;
 import org.infobip.mobile.messaging.MobileMessaging;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -117,6 +108,11 @@ public class ProviderDetailsActivity extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivity(intent);
 
+            Intent toJobPlacement = new Intent("passed_provider");
+            toJobPlacement.putExtra("txt_distance", txt_distance.getText().toString());
+            toJobPlacement.putExtras(bundle);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(toJobPlacement);
+
         });
 
         img_provider_details_back.setOnClickListener(v -> ProviderDetailsActivity.super.onBackPressed());
@@ -133,7 +129,6 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         //This fastens activity start up by updating firebase value after activity starts
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(this::updateData, 500);
-
 
 
     }
@@ -269,15 +264,22 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         txt_provider_service_identity.setText(provider.getService_identity());
         txt_provider_numOf_likes.setText(String.valueOf(provider.getNumber_of_profile_likes()));
 
+        if (provider.getDistance() > 1000) {
+            int m_dist = (int) (provider.getDistance() / 1000);
+            txt_distance.setText(String.format("%s km", m_dist));
+        } else {
+            txt_distance.setText(String.format("%sm", provider.getDistance()));
+        }
+
+
         getSkills();
         getReviews();
-        calculateDistanceBetweenClientAndProvider();
 
     }
 
     private void getSkills() {
         skills = new ArrayList<>();
-        providerSkillsAdapter = new ProviderSkillsAdapter(skills, this);
+        providerSkillsAdapter = new ProviderSkillsAdapter(skills, this, provider, txt_distance.getText().toString());
         provider_skills_rc.setHasFixedSize(true);
         provider_skills_rc.setLayoutManager(new GridLayoutManager(this, 2));
         provider_skills_rc.setAdapter(providerSkillsAdapter);
@@ -308,65 +310,6 @@ public class ProviderDetailsActivity extends AppCompatActivity {
         }
 
     }
-
-    private void calculateDistanceBetweenClientAndProvider() {
-        try {
-            //Get client's location
-            Location client_location = new Location("client_location");
-            client_location.setLatitude(User.getInstance().getLatitude());
-            client_location.setLongitude(User.getInstance().getLongitude());
-
-            //Get provider's location
-            Location provider_location = new Location("provider_location");
-            provider_location.setLatitude(provider.getLatitude());
-            provider_location.setLongitude(provider.getLongitude());
-
-            Log.d("ClientLat", String.valueOf(client_location));
-            Log.d("ProvLat", String.valueOf(provider_location));
-
-            //get the distance between the two
-            int distance_between = (int) client_location.distanceTo(provider_location);
-            txt_distance.setText(String.valueOf(distance_between));
-        } catch (Exception e) {
-            Log.d("LocationCalcError", e.getMessage());
-        }
-
-    }
-
-    /*
-    public String getDistance(final double lat1, final double lon1, final double lat2, final double lon2) {
-        final String[] parsedDistance = new String[1];
-        final String[] response = new String[1];
-        Thread thread = new Thread(() -> {
-            try {
-                URL url = new URL("http://maps.googleapis.com/maps/api/directions/json?origin=" + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=metric&mode=driving");
-                final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                InputStream in = new BufferedInputStream(conn.getInputStream());
-                response[0] = org.apache.commons.io.IOUtils.toString(in, StandardCharsets.UTF_8);
-
-                JSONObject jsonObject = new JSONObject(response[0]);
-                JSONArray array = jsonObject.getJSONArray("routes");
-                JSONObject routes = array.getJSONObject(0);
-                JSONArray legs = routes.getJSONArray("legs");
-                JSONObject steps = legs.getJSONObject(0);
-                JSONObject distance = steps.getJSONObject("distance");
-                parsedDistance[0] = distance.getString("text");
-
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Log.d("DIST", parsedDistance[0]);
-        return parsedDistance[0];
-    }
-    */
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager

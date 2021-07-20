@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachugusville.development.serviced.Adapters.HomeCardsAdapter;
-import com.gachugusville.development.serviced.Common.User;
 import com.gachugusville.development.serviced.Main.HomeCard;
 import com.gachugusville.development.serviced.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,8 +29,6 @@ public class HomeFragment extends Fragment {
     CardView toProvidersApp;
     RecyclerView lading_page_rcView;
     List<HomeCard> homeCards;
-    private String Uid;
-    private String country;
     HomeCardsAdapter homeCardsAdapter;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     BottomNavigationView bottom_nav;
@@ -47,24 +43,21 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         lading_page_rcView = view.findViewById(R.id.lading_page_rcView);
 
+        //Recycler view set up
         homeCards = new ArrayList<>();
         homeCardsAdapter = new HomeCardsAdapter(homeCards, getContext());
         lading_page_rcView.setHasFixedSize(true);
         lading_page_rcView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         lading_page_rcView.setAdapter(homeCardsAdapter);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            Uid = user.getUid();
-            FirebaseFirestore.getInstance().collection("Users").document(Uid).get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            country = Objects.requireNonNull(documentSnapshot.toObject(User.class)).getCountry();
-                        }
-                    });
-        }
+        //Read data from Firebase
+        readData();
 
+        return view;
 
+    }
+
+    private void readData() {
         try {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("ServiceCategory")
@@ -72,21 +65,20 @@ public class HomeFragment extends Fragment {
                     .addSnapshotListener((value, error) -> {
                         if (error != null) {
                             Log.d("Error", Objects.requireNonNull(error.getMessage()));
-                        }
-                        for (DocumentChange documentChange : value.getDocumentChanges()) {
-                            if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                final HomeCard card = documentChange.getDocument().toObject(HomeCard.class);
-                                homeCards.add(card);
-                                homeCardsAdapter.notifyDataSetChanged();
+                        } else if (value != null) {
+                            for (DocumentChange documentChange : value.getDocumentChanges()) {
+                                if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                                    final HomeCard card = documentChange.getDocument().toObject(HomeCard.class);
+                                    homeCards.add(card);
+                                    homeCardsAdapter.notifyDataSetChanged();
+                                }
                             }
-                        }
+                        } else
+                            Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
                     });
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d("ProviderRead", e.getMessage());
         }
-
-        return view;
-
     }
 
 }

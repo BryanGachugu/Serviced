@@ -69,7 +69,6 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/crimson_text"
                 android:maxLines="1"
-                android:text="Sofia William"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
@@ -79,7 +78,6 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/crimson_text"
-                android:text="Software engineer"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -253,11 +251,11 @@
                 android:layout_gravity="start"
                 android:background="@android:color/transparent"
                 android:ellipsize="end"
-                android:fontFamily="@font/crimson_text"
+                android:gravity="center_horizontal"
                 android:maxLines="1"
-                android:text="About Sofia"
+                android:text="About Me"
                 android:textColor="@color/purple_700"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txt_provider_description"
@@ -279,7 +277,6 @@
                 android:layout_marginTop="2dp"
                 android:background="@android:color/transparent"
                 android:ellipsize="end"
-                android:fontFamily="@font/crimson_text"
                 android:maxLines="1"
                 android:text="What do you need done..."
                 android:textColor="@color/purple_700"
@@ -295,10 +292,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:fontFamily="sans-serif"
                 android:text="Reviews"
                 android:textAlignment="center"
-                android:textColor="@color/light_blue"
+                android:textColor="@color/purple_700"
                 android:textSize="22sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -326,12 +322,9 @@
                 android:layout_marginEnd="2dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
-                android:fontFamily="@font/crimson_text"
                 android:text="@string/call"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -341,12 +334,9 @@
                 android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
-                android:fontFamily="@font/crimson_text"
                 android:text="@string/message"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:cornerRadius="10dp" />
 
         </LinearLayout>

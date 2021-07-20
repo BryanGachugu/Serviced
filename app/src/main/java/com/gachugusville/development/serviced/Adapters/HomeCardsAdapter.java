@@ -27,6 +27,7 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
 
     private final List<HomeCard> homeCardList;
     private final Context context;
+    private UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter;
 
     public HomeCardsAdapter(List<HomeCard> homeCardList, Context context) {
         this.homeCardList = homeCardList;
@@ -42,14 +43,14 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderCards holder, int position) {
-        String txt_see_all = "See all";
+
         holder.home_cardTitle.setText(homeCardList.get(position).getservice_category_name());
-        holder.txt_see_all.setText(txt_see_all);
+
 
         holder.home_card_layout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_recycler_view));
 
         List<Provider> providers = new ArrayList<>();
-        UserRecyclerViewPerCategoryAdapter userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(providers, context);
+        userRecyclerViewPerCategoryAdapter = new UserRecyclerViewPerCategoryAdapter(providers, context);
         holder.users_per_category_rcView.setHasFixedSize(true);
         holder.users_per_category_rcView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.users_per_category_rcView.setAdapter(userRecyclerViewPerCategoryAdapter);
@@ -72,6 +73,13 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.View
                         }
                     }
                 });
+
+        if (userRecyclerViewPerCategoryAdapter.getItemCount() < 2) {
+            holder.txt_see_all.setVisibility(View.GONE);
+        } else {
+            holder.txt_see_all.setVisibility(View.VISIBLE);
+            holder.txt_see_all.setText(R.string.txt_see_all);
+        }
 
         //If there are no users in a Category, set its view to Gone
     }

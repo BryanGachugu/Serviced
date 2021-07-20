@@ -18,6 +18,10 @@ import com.gachugusville.development.serviced.User.ProviderDetailsActivity;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -92,4 +96,26 @@ public class ProviderRecyclerAdapter extends RecyclerView.Adapter<ProviderRecycl
         }
     }
 
+    public void filterRecyclerView(JSONArray hits) throws JSONException {
+        searchList.clear();
+        for (int position = 0; position < hits.length(); position++) {
+            JSONObject providerJSON = hits.getJSONObject(position);
+            Provider provider = new Provider();
+            setFields(provider, providerJSON);
+            searchList.add(provider);
+        }
+        notifyDataSetChanged();
+
+    }
+
+    private void setFields(Provider provider, JSONObject providerJSON) throws JSONException {
+        //TODO JUST GET THE ID
+        provider.setDocumentId(providerJSON.getString("documentID"));
+        //provider.setProvider_cover_photo_url("jkyashdbkhlsd");
+        provider.setUser_name(providerJSON.get("user_name").toString());
+        provider.setBrand_name(providerJSON.getString("brand_name"));
+        provider.setService_identity(providerJSON.getString("service_identity"));
+        provider.setPersonal_description(providerJSON.get("personal_description").toString());
+
+    }
 }

@@ -25,11 +25,9 @@ import com.gachugusville.development.serviced.Utils.Constants;
 import com.gachugusville.development.serviced.Utils.Provider;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +57,6 @@ public class SearchFragment extends Fragment {
         Client client = new Client(Constants.ALGOLIA_APP_ID, Constants.ALGOLIA_API_KEY);
         index = client.getIndex("serviced_PROVIDERS");
 
-
         edt_search_string.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -72,24 +69,19 @@ public class SearchFragment extends Fragment {
                     try {
                         if (content != null) {
                             JSONArray hits = content.getJSONArray("hits");
-                            for (int i = 0; i < hits.length(); i++) {
-                                JSONObject providerJSON = hits.getJSONObject(i);
-                                final Provider provider = new Provider();
-                                setFields(providerJSON, provider);
-
-                            }
+                            providerRecyclerAdapter.filterRecyclerView(hits);
                         } else {
                             //TODO NO RESULTS
                             Log.d("Results_Empty", "EMPTY");
+                            listProviders.clear();
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 };
                 index.searchAsync(new Query(edt_search_string.getText().toString()),
                         completionHandler);
+
             }
 
             @Override
@@ -99,18 +91,6 @@ public class SearchFragment extends Fragment {
         });
 
         return view;
-
-    }
-
-    private void setFields(JSONObject providerJSON, Provider provider) throws JSONException {
-        //TODO JUST GET THE ID
-        //provider.setDocumentId("riyzdfbhklxcrs;djfkc ");
-        //provider.setProvider_cover_photo_url("jkyashdbkhlsd");
-        provider.setUser_name(providerJSON.get("user_name").toString());
-        provider.setBrand_name(providerJSON.getString("brand_name"));
-        provider.setService_identity(providerJSON.getString("service_identity"));
-        provider.setPersonal_description(providerJSON.get("personal_description").toString());
-
 
     }
 

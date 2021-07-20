@@ -1,6 +1,8 @@
 package com.gachugusville.development.serviced.Utils;
 
-public class Skills {
+import java.io.Serializable;
+
+public class Skills implements Serializable {
     private String skill_identity;
     private String skill_pay_mode;
     private int skill_jobs_number;

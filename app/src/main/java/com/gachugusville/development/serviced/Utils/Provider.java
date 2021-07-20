@@ -18,9 +18,10 @@ public class Provider implements Serializable{
     }
 
     String documentID = "";
+
     String provider_cover_photo_url;
 
-    String  user_name, brand_name, service_category, service_identity, personal_description,
+    String user_name, brand_name, service_category, service_identity, personal_description,
             short_note_to_users, phone, ref_url1, ref_url2, email, country;
     List<String> provider_skills;
     String profile_pic_url = "";
@@ -30,12 +31,12 @@ public class Provider implements Serializable{
     int time_available_from = 0, time_available_to = 0;
     int reach_in_distance = 0;
     int jobs_done = 0, account_views = 0, number_of_reviews = 0, number_of_profile_likes = 0;
-    double estimated_earnings = 0, latitude = 0, longitude = 0;
+    double estimated_earnings = 0, latitude = 0, longitude = 0, distance = 0;
 
-    private Provider(String documentID, String provider_cover_photo_url,String user_name, String brand_name, String service_category, String service_identity, String personal_description,
+    private Provider(String documentID, String provider_cover_photo_url, String user_name, String brand_name, String service_category, String service_identity, String personal_description,
                      String short_note_to_users, String phone, double latitude, double longitude, String profile_pic_url, String ref_url1, String ref_url2, String email, String country, List<String> provider_skills, boolean available_country_wide,
                      boolean always_available, boolean isGoogleAuth, boolean isRegistrationFinished, int total_rating, float rating, int time_available_from, int time_available_to, int reach_in_distance,
-                     int jobs_done, int account_views, int number_of_reviews, int number_of_profile_likes, double estimated_earnings) {
+                     int jobs_done, int account_views, int number_of_reviews, int number_of_profile_likes, double estimated_earnings, double distance) {
         this.documentID = documentID;
         this.provider_cover_photo_url = provider_cover_photo_url;
         this.user_name = user_name;
@@ -67,6 +68,7 @@ public class Provider implements Serializable{
         this.number_of_reviews = number_of_reviews;
         this.number_of_profile_likes = number_of_profile_likes;
         this.estimated_earnings = estimated_earnings;
+        this.distance = distance;
     }
 
     public String getUser_name() {
@@ -315,7 +317,15 @@ public class Provider implements Serializable{
         return provider_cover_photo_url;
     }
 
-    public void setProvider_cover_photo_url(String provider_cover_url){
+    public void setProvider_cover_photo_url(String provider_cover_url) {
         this.provider_cover_photo_url = provider_cover_url;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
